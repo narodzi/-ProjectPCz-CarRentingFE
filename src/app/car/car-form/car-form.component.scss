@@ -1,0 +1,15 @@
+.container {
+    padding: 0 10% 10% 10%;
+    
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+.add-button {
+    position: fixed;
+    right: 4em;
+    bottom: 4em;
+}

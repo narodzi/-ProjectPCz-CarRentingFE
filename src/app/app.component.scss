@@ -1,0 +1,9 @@
+.toolbar {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+
+    .logo {
+        cursor: pointer;
+    }
+}

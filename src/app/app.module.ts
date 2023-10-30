@@ -6,6 +6,9 @@ import { AuthInterceptor } from './shared/auth/authInterceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './home/home.component';
+import { MaterialModule } from './modules/material.module';
+import { CarModule } from './car/car.module';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HomeComponent,
+    MaterialModule,
+    CarModule
   ],
   providers: [
     KeycloakService,

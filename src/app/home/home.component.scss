@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+}
+
+.cards {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 30px;
+    justify-content: space-around;
+
+    .card {
+        height: 100%;
+    }
+}
+
+.table {
+    width: 100%;
+    height: 100%;
+}
