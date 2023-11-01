@@ -1,5 +1,6 @@
 .container {
     display: flex;
+    height: calc(100vh * 0.9);
 }
 
 .cards {
@@ -11,11 +12,11 @@
     justify-content: space-around;
 
     .card {
+        flex: 1;
         height: 100%;
     }
 }
 
-.table {
+.search {
     width: 100%;
-    height: 100%;
 }

@@ -1,0 +1,158 @@
+<div class="container">
+  <h2>Wyszukaj rezerwację</h2>
+  <form class="form">
+    <mat-expansion-panel class="panel">
+      <mat-expansion-panel-header class="panel-header">
+        <mat-panel-description>
+          <mat-form-field>
+            <mat-label>Data rozpoczęcia</mat-label>
+            <input
+              matInput
+              [ngxMatDatetimePicker]="picker"
+              placeholder="Wybierz datę"
+              [formControl]="searchForm.controls.startDate"
+            />
+            <ngx-mat-datepicker-toggle
+              matSuffix
+              [for]="picker"
+            ></ngx-mat-datepicker-toggle>
+            <ngx-mat-datetime-picker
+              #picker
+              [color]="'primary'"
+              [enableMeridian]="false"
+              [disableMinute]="true"
+            >
+            </ngx-mat-datetime-picker>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Data zakończenia</mat-label>
+            <input
+              matInput
+              [ngxMatDatetimePicker]="picker2"
+              placeholder="Wybierz datę"
+              [formControl]="searchForm.controls.endDate"
+            />
+            <ngx-mat-datepicker-toggle
+              matSuffix
+              [for]="picker2"
+            ></ngx-mat-datepicker-toggle>
+            <ngx-mat-datetime-picker
+              #picker2
+              [color]="'primary'"
+              [enableMeridian]="false"
+              [disableMinute]="true"
+            >
+            </ngx-mat-datetime-picker>
+          </mat-form-field>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div>
+        <mat-form-field>
+          <mat-label>Marka</mat-label>
+          <mat-select [formControl]="searchForm.controls.carBrand">
+            <mat-option
+              *ngFor="let carBrand of brandOptions"
+              [value]="carBrand"
+            >
+              {{ carBrand }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Model</mat-label>
+          <mat-select [formControl]="searchForm.controls.carModel">
+            <mat-option
+              *ngFor="let carModel of modelOptions"
+              [value]="carModel"
+            >
+              {{ carModel }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Minimalny rok produkcji</mat-label>
+          <input
+            type="number"
+            matInput
+            [formControl]="searchForm.controls.carEarliestProductionYear"
+          />
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Typ skrzyni biegów</mat-label>
+          <mat-select [formControl]="searchForm.controls.carGearboxType">
+            <mat-option
+              *ngFor="let gearBox of gearBoxOptions"
+              [value]="gearBox"
+            >
+              {{ gearBox }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Rodzaj paliwa</mat-label>
+          <mat-select [formControl]="searchForm.controls.carFuelType">
+            <mat-option
+              *ngFor="let fuelType of fuelTypeOptions"
+              [value]="fuelType"
+            >
+              {{ fuelType }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Minimalna liczba koni</mat-label>
+          <input
+            type="number"
+            matInput
+            [formControl]="searchForm.controls.carMinimalHorsePower"
+          />
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field>
+          <mat-label>Liczba miejsc</mat-label>
+          <input type = "number" matInput [formControl]="searchForm.controls.carSeatNumber" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Liczba drzwi</mat-label>
+          <input type = "number" matInput [formControl]="searchForm.controls.carDoorsNumber" />
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Kolor</mat-label>
+          <input matInput [formControl]="searchForm.controls.carColor" />
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+
+    <div>
+      <mat-form-field>
+        <mat-label>Cena od</mat-label>
+        <input
+          type="number"
+          matInput
+          [formControl]="searchForm.controls.minimalPrice"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Cena do</mat-label>
+        <input
+          type="number"
+          matInput
+          [formControl]="searchForm.controls.maximalPrice"
+          required
+        />
+      </mat-form-field>
+    </div>
+  </form>
+  <button [disabled]="searchForm.invalid" mat-raised-button color="primary">SZUKAJ</button>
+</div>
