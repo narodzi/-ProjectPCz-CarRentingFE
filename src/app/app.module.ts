@@ -9,6 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { MaterialModule } from './modules/material.module';
 import { CarModule } from './car/car.module';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
+import { NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { CarModule } from './car/car.module';
     BrowserAnimationsModule,
     HomeComponent,
     MaterialModule,
-    CarModule
+    CarModule,
+    MatNativeDateModule,
+    NgxMatNativeDateModule
   ],
   providers: [
     KeycloakService,
@@ -29,6 +33,10 @@ import { CarModule } from './car/car.module';
       useClass: AuthInterceptor,
       multi: true,
     },
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: 'pl-PL'
+    }
   ],
   bootstrap: [AppComponent]
 })

@@ -29,8 +29,8 @@ export type CarFormModel = FormGroup<{
 })
 export class CarFormComponent implements OnInit, OnDestroy {
 
-  readonly gearBoxOptions = ['automatyczna', 'manualna']
-  readonly fuelTypeOptions = ['benzyna', 'diesel', 'gaz', 'elektryk']
+  readonly gearBoxOptions = ['automatyczna', 'manualna'] //todo change
+  readonly fuelTypeOptions = ['benzyna', 'diesel', 'gaz', 'elektryk']//todo change
 
   readonly carForm: CarFormModel = this.fb.nonNullable.group({
     id: new FormControl<string | null>(null),

@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="rentalData!">
+<table class="table" mat-table [dataSource]="rentalData!">
     <ng-container matColumnDef="startDate">
         <th mat-header-cell *matHeaderCellDef> Początek rezerwacji </th>
         <td mat-cell *matCellDef="let element"> {{element.startDate}} </td>
