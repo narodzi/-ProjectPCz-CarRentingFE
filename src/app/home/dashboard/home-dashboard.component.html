@@ -1,0 +1,85 @@
+<div>
+  <mat-tab-group style="width: 100%;" [selectedIndex]="selectedIndex">
+    <mat-tab>
+      <div class="container">
+        <div class="cards">
+          <mat-card class="card">
+            <mat-card-header>
+              <mat-card-title> Witaj Mietek! Oto szczegóły twojego ostatniego wypożyczenia: </mat-card-title>
+            </mat-card-header>
+            <mat-card-content
+              >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis ex
+              sit amet dolor porttitor tristique et eget metus. Donec dui est, dictum
+              id tincidunt eget, pellentesque quis leo. In hac habitasse platea
+              dictumst. Praesent finibus urna a magna vestibulum malesuada. Sed
+              luctus, neque ut maximus luctus, arcu quam tincidunt orci, et ultrices
+              dolor dui id augue. Etiam orci mi, molestie quis posuere id, aliquet non
+              ipsum. Nullam leo justo, pretium nec vehicula a, feugiat ac
+              metus.</mat-card-content
+            >
+          </mat-card>
+          <mat-card class="card">
+            <mat-card-header>
+              <mat-card-title> Twoje wypożyczenia </mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <app-rental-table></app-rental-table
+            ></mat-card-content>
+          </mat-card>
+        </div>
+        <div class="search">
+          <app-search-form (sendForm)="handleFormFilled($event)"></app-search-form>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <button mat-button (click)="changeTab(HomeDashboardNav.FIRST_TAB)">{{"<- Powrót"}}</button>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title> Wynik wyszukiwania 1 </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis ex
+          sit amet dolor porttitor tristique et eget metus. Donec dui est, dictum
+          id tincidunt eget, pellentesque quis leo. In hac habitasse platea
+          dictumst. Praesent finibus urna a magna vestibulum malesuada. Sed
+          luctus, neque ut maximus luctus, arcu quam tincidunt orci, et ultrices
+          dolor dui id augue. Etiam orci mi, molestie quis posuere id, aliquet non
+          ipsum. Nullam leo justo, pretium nec vehicula a, feugiat ac metus.
+          ></mat-card-content
+        >
+      </mat-card>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title> Wynik wyszukiwania 2 </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis ex
+          sit amet dolor porttitor tristique et eget metus. Donec dui est, dictum
+          id tincidunt eget, pellentesque quis leo. In hac habitasse platea
+          dictumst. Praesent finibus urna a magna vestibulum malesuada. Sed
+          luctus, neque ut maximus luctus, arcu quam tincidunt orci, et ultrices
+          dolor dui id augue. Etiam orci mi, molestie quis posuere id, aliquet non
+          ipsum. Nullam leo justo, pretium nec vehicula a, feugiat ac metus.
+          ></mat-card-content
+        >
+      </mat-card>
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title> Wynik wyszukiwania 3 </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis ex
+          sit amet dolor porttitor tristique et eget metus. Donec dui est, dictum
+          id tincidunt eget, pellentesque quis leo. In hac habitasse platea
+          dictumst. Praesent finibus urna a magna vestibulum malesuada. Sed
+          luctus, neque ut maximus luctus, arcu quam tincidunt orci, et ultrices
+          dolor dui id augue. Etiam orci mi, molestie quis posuere id, aliquet non
+          ipsum. Nullam leo justo, pretium nec vehicula a, feugiat ac metus.
+          ></mat-card-content
+        >
+      </mat-card>
+    </mat-tab>
+  </mat-tab-group>
+
+</div>

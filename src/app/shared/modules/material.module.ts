@@ -11,6 +11,8 @@ import { MatTableModule } from '@angular/material/table'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { MatExpansionModule } from '@angular/material/expansion'
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [NgxMatDatetimePickerModule,
@@ -25,7 +27,9 @@ import { MatExpansionModule } from '@angular/material/expansion'
     MatSelectModule,
     MatTableModule,
     MatDatepickerModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule,
+    MatIconModule
   ],
   exports: [NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
@@ -39,7 +43,9 @@ import { MatExpansionModule } from '@angular/material/expansion'
     MatSelectModule,
     MatTableModule,
     MatDatepickerModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatDialogModule,
+    MatIconModule
   ],
 })
 export class MaterialModule {}

@@ -6,21 +6,21 @@ import { AuthInterceptor } from './shared/auth/authInterceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HomeComponent } from './home/home.component';
-import { MaterialModule } from './modules/material.module';
+import { HomeDashboardComponent } from './home/dashboard/home-dashboard.component';
+import { MaterialModule } from './shared/modules/material.module';
 import { CarModule } from './car/car.module';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HomeComponent,
+    HomeDashboardComponent,
     MaterialModule,
     CarModule,
     MatNativeDateModule,

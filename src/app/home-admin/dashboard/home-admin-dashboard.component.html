@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="column">
+        <mat-card>
+            <mat-card-header>
+              <mat-card-title> CarRental sp z.o.o - panel</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              statystyki
+            </mat-card-content>
+          </mat-card>
+        <mat-card>
+            <mat-card-header>
+              <mat-card-title> Przychody firmy</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              statystyki
+            </mat-card-content>
+          </mat-card>
+    </div>
+    <div class="column">
+        <app-rental-table [mode]="RentalTableMode.ADMIN"></app-rental-table>
+    </div>
+</div>

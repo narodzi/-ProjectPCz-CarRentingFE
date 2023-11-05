@@ -1,0 +1,11 @@
+.user-table {
+    min-height: calc(100vh*0.55);
+}
+
+.admin-table {
+    min-height: calc(100vh*0.9);
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+    background: #e6e9ed;
+  }
