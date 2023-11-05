@@ -154,5 +154,5 @@
       </mat-form-field>
     </div>
   </form>
-  <button [disabled]="searchForm.invalid" mat-raised-button color="primary">SZUKAJ</button>
+  <button [disabled]="searchForm.invalid" (click)="searchClicked()" mat-raised-button color="primary">SZUKAJ</button>
 </div>

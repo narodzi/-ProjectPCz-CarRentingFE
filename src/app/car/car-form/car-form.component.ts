@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
-import { CarDto } from 'src/app/models/car.model';
+import { CarDto } from 'src/app/shared/models/car.model';
 
 export type CarFormModel = FormGroup<{
   id: FormControl<string | null>

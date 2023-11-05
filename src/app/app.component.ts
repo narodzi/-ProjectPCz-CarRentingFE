@@ -9,8 +9,24 @@ import { Router } from '@angular/router';
 export class AppComponent {
   constructor(private readonly router: Router) {}
 
+  goToAdminHomePage() {
+    this.router.navigate(['home_admin'])
+  }
+
   goToCarPage() {
     this.router.navigate(['car'])
+  }
+
+  goToUsersPage() {
+    this.router.navigate(['users'])
+  }
+
+  goToUserAccount() {
+    this.router.navigate(['user_account'])
+  }
+
+  goToAdminAccount() {
+    this.router.navigate(['admin_account'])
   }
 
   goToMain() {

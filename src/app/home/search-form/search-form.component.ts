@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MaterialModule } from '../modules/material.module';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { MaterialModule } from '../../shared/modules/material.module';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
-import { converStringToIso } from '../shared/utils/date-time.adapter';
-import { Subject, takeUntil } from 'rxjs';
-import { RentalSearchDto } from '../models/rental.model';
+import { converStringToIso } from '../../shared/utils/date-time.adapter';
 import { CommonModule } from '@angular/common';
+import { RentalSearchDto } from 'src/app/shared/models/rental.model';
 
 export type SearchFormModel = FormGroup<{
   startDate: FormControl<string | null>
@@ -23,13 +22,15 @@ export type SearchFormModel = FormGroup<{
 }>
 
 @Component({
-  selector: 'app-search-panel',
-  templateUrl: './search-panel.component.html',
-  styleUrls: ['./search-panel.component.scss'],
+  selector: 'app-search-form',
+  templateUrl: './search-form.component.html',
+  styleUrls: ['./search-form.component.scss'],
   standalone: true,
   imports: [CommonModule, MaterialModule, ReactiveFormsModule]
 })
-export class SearchPanelComponent implements OnInit, OnDestroy {
+export class SearchFormComponent implements OnInit {
+
+  @Output() sendForm = new EventEmitter<RentalSearchDto>()
 
   readonly brandOptions = ['Opel', 'Ford', 'Audi', 'Porsche']
   readonly modelOptions = ['Corsa', 'Fiesta', 'A2', 'Cayenne']
@@ -53,16 +54,17 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
   }, {
   })
 
-  private readonly destroy$ = new Subject<void>()
+
 
   constructor(private readonly fb: FormBuilder) {}
 
   ngOnInit() {
-    this.searchForm.statusChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      if(this.searchForm.valid) {
-        console.log(this.convertFormToDto(this.searchForm))
-      }
-    })
+  }
+
+  searchClicked() {
+    if(this.searchForm.valid) {
+      this.sendForm.emit(this.convertFormToDto(this.searchForm))
+    }
   }
 
   convertFormToDto(form: SearchFormModel): RentalSearchDto {
@@ -81,11 +83,6 @@ export class SearchPanelComponent implements OnInit, OnDestroy {
       maximalPrice: form.controls.maximalPrice.value ?? undefined,
       minimalPrice: form.controls.minimalPrice.value ?? undefined
     }
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next()
-    this.destroy$.complete()
   }
 
   startDateValidator(): ValidatorFn {
