@@ -1,0 +1,24 @@
+.car-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+
+    .car-title {
+        font-size: 34px;
+        font-weight: bold;
+        color: black;
+    }
+}
+
+.rental-info-container {
+    display: flex;
+
+    div {
+        width: 100%;
+    }
+}
+
+.flex-half {
+    flex: 1;
+}

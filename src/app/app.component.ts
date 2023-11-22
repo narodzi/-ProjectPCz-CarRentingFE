@@ -25,10 +25,6 @@ export class AppComponent {
     this.router.navigate(['user_account'])
   }
 
-  goToAdminAccount() {
-    this.router.navigate(['admin_account'])
-  }
-
   goToMain() {
     this.router.navigate(['home'])
   }

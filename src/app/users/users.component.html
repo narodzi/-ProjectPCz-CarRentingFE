@@ -1,3 +1,5 @@
 <div class="column-container">
-    <p>Tabela z uzytkownikami</p>
+    <ng-container *ngIf="users$ | async as users">
+        <app-user-table class="table" [usersData]="users"></app-user-table>
+    </ng-container>
 </div>

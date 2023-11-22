@@ -3,20 +3,20 @@ import { MaterialModule } from '../../shared/modules/material.module';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { converStringToIso } from '../../shared/utils/date-time.adapter';
 import { CommonModule } from '@angular/common';
-import { RentalSearchDto } from 'src/app/shared/models/rental.model';
+import { RentalSearchRequest } from 'src/app/shared/models/rental.model';
 
 export type SearchFormModel = FormGroup<{
   startDate: FormControl<string | null>
   endDate: FormControl<string | null>
   carBrand: FormControl<string | null>
-  carModel: FormControl<string | null>
+  carType: FormControl<string | null>
   carEarliestProductionYear: FormControl<number | null>
   carGearboxType: FormControl<string | null>
   carFuelType: FormControl<string | null>
   carMinimalHorsePower: FormControl<number | null>
   carSeatNumber: FormControl<number | null>
   carDoorsNumber: FormControl<number | null>
-  carColor: FormControl<string | null>
+  minimalTrunkSize: FormControl<number | null>
   minimalPrice: FormControl<number | null>
   maximalPrice: FormControl<number | null>
 }>
@@ -30,7 +30,7 @@ export type SearchFormModel = FormGroup<{
 })
 export class SearchFormComponent implements OnInit {
 
-  @Output() sendForm = new EventEmitter<RentalSearchDto>()
+  @Output() sendForm = new EventEmitter<RentalSearchRequest>()
 
   readonly brandOptions = ['Opel', 'Ford', 'Audi', 'Porsche']
   readonly modelOptions = ['Corsa', 'Fiesta', 'A2', 'Cayenne']
@@ -41,14 +41,14 @@ export class SearchFormComponent implements OnInit {
     startDate: new FormControl<string | null>(null, [Validators.required, this.startDateValidator()]),
     endDate: new FormControl<string | null>(null, [Validators.required, this.endDateValidator()]),
     carBrand: new FormControl<string | null>(null),
-    carModel: new FormControl<string | null>(null),
+    carType: new FormControl<string | null>(null),
     carEarliestProductionYear: new FormControl<number | null>(null, Validators.min(2000)),
     carGearboxType: new FormControl<string | null>(null),
     carFuelType: new FormControl<string | null>(null),
     carMinimalHorsePower: new FormControl<number | null>(null, Validators.min(50)),
     carSeatNumber: new FormControl<number | null>(null, [Validators.min(1), Validators.max(10)]),
     carDoorsNumber: new FormControl<number | null>(null, [Validators.min(2), Validators.max(5)]),
-    carColor: new FormControl<string | null>(null),
+    minimalTrunkSize: new FormControl<number | null>(null, Validators.min(1)),
     minimalPrice: new FormControl<number | null>(null, [Validators.required, Validators.min(1)]),
     maximalPrice: new FormControl<number | null>(null, [Validators.required, Validators.min(1)]),
   }, {
@@ -67,19 +67,19 @@ export class SearchFormComponent implements OnInit {
     }
   }
 
-  convertFormToDto(form: SearchFormModel): RentalSearchDto {
+  convertFormToDto(form: SearchFormModel): RentalSearchRequest {
     return {
-      startDate: converStringToIso(form.controls.startDate.value) ?? undefined,
-      endDate: converStringToIso(form.controls.endDate.value) ?? undefined,
-      carBrand: form.controls.carBrand.value,
-      carModel: form.controls.carModel.value,
-      carEarliestProductionYear: form.controls.carEarliestProductionYear.value,
-      carGearboxType: form.controls.carGearboxType.value,
-      carFuelType: form.controls.carFuelType.value,
-      carMinimalHorsePower: form.controls.carMinimalHorsePower.value,
-      carSeatNumber: form.controls.carSeatNumber.value,
-      carDoorsNumber: form.controls.carDoorsNumber.value,
-      carColor: form.controls.carColor.value,
+      start_date: converStringToIso(form.controls.startDate.value) ?? undefined,
+      end_date: converStringToIso(form.controls.endDate.value) ?? undefined,
+      brand: form.controls.carBrand.value,
+      type: form.controls.carType.value,
+      earliest_production_year: form.controls.carEarliestProductionYear.value,
+      gearbox: form.controls.carGearboxType.value,
+      fuel_type: form.controls.carFuelType.value,
+      minimal_horse_number: form.controls.carMinimalHorsePower.value,
+      number_of_seats: form.controls.carSeatNumber.value,
+      number_of_doors: form.controls.carDoorsNumber.value,
+      minimal_trunk_size: form.controls.minimalTrunkSize.value,
       maximalPrice: form.controls.maximalPrice.value ?? undefined,
       minimalPrice: form.controls.minimalPrice.value ?? undefined
     }
