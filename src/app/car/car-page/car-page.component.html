@@ -1,0 +1,9 @@
+<ng-container *ngIf="car$; empty">
+    <ng-container *ngIf="car$ | async as car">
+        <pre>{{ car | json }}</pre>
+    </ng-container>
+</ng-container>
+
+<ng-template #empty>
+    Pusto
+</ng-template>

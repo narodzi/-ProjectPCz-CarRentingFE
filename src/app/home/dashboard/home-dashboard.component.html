@@ -3,20 +3,23 @@
     <mat-tab>
       <div class="container">
         <div class="cards">
-          <mat-card class="card">
+          <mat-card class="last-rental-card">
             <mat-card-header>
-              <mat-card-title> Witaj Mietek! Oto szczegóły twojego ostatniego wypożyczenia: </mat-card-title>
+              <mat-card-title> Witaj Mietek! Oto twoje bieżące wypożyczenie: </mat-card-title>
             </mat-card-header>
-            <mat-card-content
-              >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis ex
-              sit amet dolor porttitor tristique et eget metus. Donec dui est, dictum
-              id tincidunt eget, pellentesque quis leo. In hac habitasse platea
-              dictumst. Praesent finibus urna a magna vestibulum malesuada. Sed
-              luctus, neque ut maximus luctus, arcu quam tincidunt orci, et ultrices
-              dolor dui id augue. Etiam orci mi, molestie quis posuere id, aliquet non
-              ipsum. Nullam leo justo, pretium nec vehicula a, feugiat ac
-              metus.</mat-card-content
-            >
+            <mat-card-content>
+              <div class="last-rental-card-content">
+                <img style="width: 250px; border: solid 1px black; border-radius: 5px;" [src]="'https://cdn.imagin.studio/getImage?&customer=img&make=citroen&modelFamily=c5-x&modelRange=c5-x&modelVariant=od&modelYear=2021&powerTrain=hybrid&transmission=0&bodySize=5&trim=eu&paintId=pspc0059&angle=01&zoomtype=fullscreen'"/>
+                <div class="info">
+                  <p class="car-header">Citroen C4</p>
+                  <p class="rental-date">11.11.2023 10:00 - 21.11.2023 15:00</p>
+                </div>
+                  <div class="status">
+                    <img style="width: 50px; margin-bottom: 5px;" [src]="'assets/pending-icon.svg'"/>
+                    <p style="font-weight: bold;">Oczekujące</p>
+                </div>
+              </div>
+              </mat-card-content>
           </mat-card>
           <mat-card class="card">
             <mat-card-header>
@@ -28,57 +31,12 @@
           </mat-card>
         </div>
         <div class="search">
-          <app-search-form (sendForm)="handleFormFilled($event)"></app-search-form>
+          <app-search-form class="search-panel" (sendForm)="handleFormFilled($event)"></app-search-form>
         </div>
       </div>
     </mat-tab>
     <mat-tab>
-      <button mat-button (click)="changeTab(HomeDashboardNav.FIRST_TAB)">{{"<- Powrót"}}</button>
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title> Wynik wyszukiwania 1 </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis ex
-          sit amet dolor porttitor tristique et eget metus. Donec dui est, dictum
-          id tincidunt eget, pellentesque quis leo. In hac habitasse platea
-          dictumst. Praesent finibus urna a magna vestibulum malesuada. Sed
-          luctus, neque ut maximus luctus, arcu quam tincidunt orci, et ultrices
-          dolor dui id augue. Etiam orci mi, molestie quis posuere id, aliquet non
-          ipsum. Nullam leo justo, pretium nec vehicula a, feugiat ac metus.
-          ></mat-card-content
-        >
-      </mat-card>
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title> Wynik wyszukiwania 2 </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis ex
-          sit amet dolor porttitor tristique et eget metus. Donec dui est, dictum
-          id tincidunt eget, pellentesque quis leo. In hac habitasse platea
-          dictumst. Praesent finibus urna a magna vestibulum malesuada. Sed
-          luctus, neque ut maximus luctus, arcu quam tincidunt orci, et ultrices
-          dolor dui id augue. Etiam orci mi, molestie quis posuere id, aliquet non
-          ipsum. Nullam leo justo, pretium nec vehicula a, feugiat ac metus.
-          ></mat-card-content
-        >
-      </mat-card>
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title> Wynik wyszukiwania 3 </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis quis ex
-          sit amet dolor porttitor tristique et eget metus. Donec dui est, dictum
-          id tincidunt eget, pellentesque quis leo. In hac habitasse platea
-          dictumst. Praesent finibus urna a magna vestibulum malesuada. Sed
-          luctus, neque ut maximus luctus, arcu quam tincidunt orci, et ultrices
-          dolor dui id augue. Etiam orci mi, molestie quis posuere id, aliquet non
-          ipsum. Nullam leo justo, pretium nec vehicula a, feugiat ac metus.
-          ></mat-card-content
-        >
-      </mat-card>
+      <app-search-results [filters]="rentalFilters" [rentalSearchResults]="rentalSearchResults" (takeMeBackToHomePage)="changeTab($event)"></app-search-results>
     </mat-tab>
   </mat-tab-group>
 

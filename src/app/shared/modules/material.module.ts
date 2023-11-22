@@ -13,6 +13,9 @@ import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-mat
 import { MatExpansionModule } from '@angular/material/expansion'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips'
+import { MatTooltipModule } from '@angular/material/tooltip'
+import { MatRippleModule } from '@angular/material/core';
 
 @NgModule({
   imports: [NgxMatDatetimePickerModule,
@@ -29,7 +32,10 @@ import { MatIconModule } from '@angular/material/icon';
     MatDatepickerModule,
     MatExpansionModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatChipsModule,
+    MatTooltipModule,
+    MatRippleModule
   ],
   exports: [NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
@@ -45,7 +51,10 @@ import { MatIconModule } from '@angular/material/icon';
     MatDatepickerModule,
     MatExpansionModule,
     MatDialogModule,
-    MatIconModule
+    MatIconModule,
+    MatChipsModule,
+    MatTooltipModule,
+    MatRippleModule
   ],
 })
 export class MaterialModule {}

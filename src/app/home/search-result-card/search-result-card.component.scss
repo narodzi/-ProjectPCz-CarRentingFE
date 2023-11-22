@@ -1,0 +1,25 @@
+.last-rental-card {
+    display: flex;
+    gap: 15px;
+    padding-top: 10px;
+
+    .info {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0 10px 0;
+        
+        mat-chip {
+            span:first-child {
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.price-text {
+    font-size: 22px;
+    font-weight: bold;
+    margin-right: 20px;
+}

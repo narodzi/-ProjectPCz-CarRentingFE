@@ -32,8 +32,7 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Akcje </th>
         <td mat-cell *matCellDef="let element">
-            <button mat-button><mat-icon [fontIcon]="'delete'"></mat-icon></button>    
-            <button mat-button><mat-icon [fontIcon]="'edit'"></mat-icon></button>    
+            <button mat-button (click)="openDialog()"><mat-icon [fontIcon]="'info'"></mat-icon></button>    
         </td>
       </ng-container>
 
@@ -43,5 +42,5 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="mode === RentalTableMode.USER ? displayedColumnsUSER : displayedColumnsADMIN"></tr>
-      <tr mat-row (click)="click(row)" *matRowDef="let row; columns: mode === RentalTableMode.USER ? displayedColumnsUSER : displayedColumnsADMIN;"></tr>
+      <tr mat-row *matRowDef="let row; columns: mode === RentalTableMode.USER ? displayedColumnsUSER : displayedColumnsADMIN;"></tr>
 </table>

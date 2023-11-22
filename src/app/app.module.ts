@@ -11,6 +11,9 @@ import { MaterialModule } from './shared/modules/material.module';
 import { CarModule } from './car/car.module';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { NgxMatNativeDateModule } from '@angular-material-components/datetime-picker';
+import { FilteredApi } from './shared/api/filtered.api';
+import { CarApi } from './shared/api/car.api';
+import { UserApi } from './shared/api/user.api';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { NgxMatNativeDateModule } from '@angular-material-components/datetime-pi
     MaterialModule,
     CarModule,
     MatNativeDateModule,
-    NgxMatNativeDateModule
+    NgxMatNativeDateModule,
+    HttpClientModule
   ],
   providers: [
     KeycloakService,
@@ -36,7 +40,10 @@ import { NgxMatNativeDateModule } from '@angular-material-components/datetime-pi
     {
       provide: MAT_DATE_LOCALE,
       useValue: 'pl-PL'
-    }
+    },
+    FilteredApi,
+    CarApi,
+    UserApi
   ],
   bootstrap: [AppComponent]
 })

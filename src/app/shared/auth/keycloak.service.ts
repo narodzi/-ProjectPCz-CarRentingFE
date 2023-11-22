@@ -190,4 +190,8 @@ export class KeycloakService {
     return KeycloakService.token;
   }
 
+  getUserId() {
+    return KeycloakService.keycloakAuthObject.tokenParsed.sub
+  }
+
 }

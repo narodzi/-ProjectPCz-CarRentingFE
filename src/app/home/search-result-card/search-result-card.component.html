@@ -1,0 +1,59 @@
+<mat-card>
+    <mat-card-content>
+        <div class="last-rental-card">
+            <img *ngIf="singleResult?.image_url" style="width: 250px; border: solid 1px black; border-radius: 5px;" [src]="singleResult?.image_url"/>
+            <div class="info">
+              <mat-chip-listbox>
+                <mat-chip *ngIf="singleResult?.brand">
+                    <span>Marka: </span>
+                    <span>{{ singleResult?.brand}}</span>
+                </mat-chip>
+                <mat-chip *ngIf="singleResult?.model">
+                  <span>Model: </span>
+                  <span>{{ singleResult?.model}}</span>
+                </mat-chip>
+                <mat-chip *ngIf="singleResult?.number_of_seats">
+                  <span>Liczba miejsc: </span>
+                  <span>{{ singleResult?.number_of_seats }}</span>
+                </mat-chip>
+                <mat-chip *ngIf="singleResult?.horse_power">
+                  <span>Liczba koni mechanicznych: </span>
+                  <span>{{ singleResult?.horse_power }}</span>
+                </mat-chip>
+                <mat-chip *ngIf="singleResult?.gearbox">
+                  <span>Typ skrzyni biegów: </span>
+                  <span>{{ singleResult?.gearbox }}</span>
+                </mat-chip>
+                <mat-chip *ngIf="singleResult?.trunk">
+                  <span>Pojemność bagażnika: </span>
+                  <span>{{ singleResult?.trunk }}</span>
+                </mat-chip>
+                <mat-chip *ngIf="singleResult?.fuel_type">
+                  <span>Rodzaj paliwa: </span>
+                  <span>{{ singleResult?.fuel_type }}</span>
+                </mat-chip>
+                <mat-chip *ngIf="singleResult?.number_of_doors">
+                  <span>Liczba drzwi: </span>
+                  <span>{{ singleResult?.number_of_doors }}</span>
+                </mat-chip>
+                <mat-chip *ngIf="singleResult?.color">
+                  <span>Kolor: </span>
+                  <span>{{ singleResult?.color }}</span>
+                </mat-chip>
+                <mat-chip *ngIf="singleResult?.production_year">
+                  <span>Rok produkcji: </span>
+                  <span>{{ singleResult?.production_year }}</span>
+                </mat-chip>
+                <mat-chip *ngIf="singleResult?.fuel_consumption">
+                  <span>Przeciętne zużycie paliwa: </span>
+                  <span>{{ singleResult?.fuel_consumption + 'l/km'}}</span>
+                </mat-chip>
+              </mat-chip-listbox>
+            </div>
+          </div>
+    </mat-card-content>
+    <mat-card-actions align="end">
+      <span *ngIf="singleResult?.price_overall" class="price-text">{{ singleResult?.price_overall + ' zł' }}</span>
+      <button mat-raised-button color="primary">Rezerwuj</button>
+    </mat-card-actions>
+</mat-card>

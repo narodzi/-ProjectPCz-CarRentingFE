@@ -1,0 +1,58 @@
+<div class="header">
+    <button class="back-button" mat-button (click)="backToHomePage()">
+        <mat-icon [fontIcon]="'arrow_back_ios'"></mat-icon>
+        Powrót
+    </button>
+    <span class="header-bold-text">Poszukujesz:</span>
+    <mat-chip-listbox>
+        <mat-chip *ngIf="filters?.start_date && filters?.end_date">
+            Dostępność od: 
+            <span>{{ (filters?.start_date | date : 'dd-MM-yyyy hh:mm') + ' - ' + (filters?.end_date | date : 'dd-MM-yyyy hh:mm') }}</span>
+        </mat-chip>
+        <mat-chip *ngIf="filters?.brand">
+            {{ filters?.brand }}
+        </mat-chip>
+        <mat-chip *ngIf="filters?.type">
+            {{ filters?.type }}
+        </mat-chip>
+        <mat-chip *ngIf="filters?.earliest_production_year">
+            Minimalny rok produkcji: 
+            <span>{{ filters?.earliest_production_year }}</span>
+        </mat-chip>
+        <mat-chip *ngIf="filters?.gearbox">
+            Skrzynia biegów: 
+            <span>{{ filters?.gearbox }}</span>
+        </mat-chip>
+        <mat-chip *ngIf="filters?.fuel_type">
+            Rodzaj paliwa: 
+            <span>{{ filters?.fuel_type }}</span>
+        </mat-chip>
+        <mat-chip *ngIf="filters?.minimal_horse_number">
+            Minimalna liczba koni: 
+            <span>{{ filters?.minimal_horse_number }}</span>
+        </mat-chip>
+        <mat-chip *ngIf="filters?.number_of_seats">
+            Liczba miejsc: 
+            <span>{{ filters?.number_of_seats }}</span>
+        </mat-chip>
+        <mat-chip *ngIf="filters?.number_of_doors">
+            Liczba drzwi: 
+            <span>{{ filters?.number_of_doors }}</span>
+        </mat-chip>
+        <mat-chip *ngIf="filters?.minimal_trunk_size">
+            Minimalny rozmiar bagażnika:
+            <span>{{ filters?.minimal_trunk_size }}</span>
+        </mat-chip>
+        <mat-chip *ngIf="filters?.minimalPrice">
+            Minimalna cena wypożyczenia:
+            <span>{{ filters?.minimalPrice }}</span>
+        </mat-chip>
+        <mat-chip *ngIf="filters?.maximalPrice">
+            Maksymalna cena wypożyczenia:
+            <span>{{ filters?.maximalPrice }}</span>
+        </mat-chip>
+      </mat-chip-listbox>
+</div>
+<div class="results-container">
+    <app-search-result-card *ngFor="let result of rentalSearchResults" [singleResult]="result"></app-search-result-card>
+</div>
