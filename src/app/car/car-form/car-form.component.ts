@@ -1,91 +1,60 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
-import { CarDto } from 'src/app/shared/models/car.model';
-
-export type CarFormModel = FormGroup<{
-  id: FormControl<string | null>
-  brand: FormControl<string | null>
-  model: FormControl<string | null>
-  numberOfSeats: FormControl<number | null>
-  horsePower: FormControl<number | null>
-  gearbox: FormControl<string | null>
-  trunk: FormControl<number | null>
-  fuelType: FormControl<string | null>
-  numberOfDoors: FormControl<number | null>
-  color: FormControl<string | null>
-  productionYear: FormControl<number | null>
-  fuelConsumption: FormControl<number | null>
-  price: FormControl<number | null>
-  //available: FormControl<boolean | null>
-  lastServiceDate: FormControl<string | null>
-  nextServiceDate: FormControl<string | null>
-}>
+import { CarApi } from 'src/app/shared/api/car.api';
+import { Car } from 'src/app/shared/models/car.model';
 
 @Component({
   selector: 'app-car-form',
   templateUrl: './car-form.component.html',
   styleUrls: ['./car-form.component.scss']
 })
-export class CarFormComponent implements OnInit, OnDestroy {
+export class CarFormComponent {
+  // readonly gearBoxOptions = ['automatyczna', 'manualna'] //todo change
+  // readonly fuelTypeOptions = ['benzyna', 'diesel', 'gaz', 'elektryk']//todo change
 
-  readonly gearBoxOptions = ['automatyczna', 'manualna'] //todo change
-  readonly fuelTypeOptions = ['benzyna', 'diesel', 'gaz', 'elektryk']//todo change
+  // readonly carForm: CarFormModel = this.fb.nonNullable.group({
+  //   id: new FormControl<string | null>(null),
+  //   brand: new FormControl<string | null>(null, Validators.required),
+  //   model: new FormControl<string | null>(null, Validators.required),
+  //   number_of_seats: new FormControl<number | null>(null, Validators.required),
+  //   horse_power: new FormControl<number | null>(null, Validators.required),
+  //   gearbox: new FormControl<string | null>(null, Validators.required),
+  //   trunk: new FormControl<number | null>(null, Validators.required),
+  //   fuel_type: new FormControl<string | null>(null, Validators.required),
+  //   number_of_doors: new FormControl<number | null>(null, Validators.required),
+  //   color: new FormControl<string | null>(null, Validators.required),
+  //   production_year: new FormControl<number | null>(null, Validators.required),
+  //   fuel_consumption: new FormControl<number | null>(null, Validators.required),
+  //   price: new FormControl<number | null>(null, Validators.required),
+  //   available: new FormControl<boolean | null>(null, Validators.required),
+  //   image_url: new FormControl<string | null>(null),
+  //   type: new FormControl<string | null>(null, Validators.required),
+  // })
 
-  readonly carForm: CarFormModel = this.fb.nonNullable.group({
-    id: new FormControl<string | null>(null),
-    brand: new FormControl<string | null>(null, Validators.required),
-    model: new FormControl<string | null>(null, Validators.required),
-    numberOfSeats: new FormControl<number | null>(null, Validators.required),
-    horsePower: new FormControl<number | null>(null, Validators.required),
-    gearbox: new FormControl<string | null>(null, Validators.required),
-    trunk: new FormControl<number | null>(null, Validators.required),
-    fuelType: new FormControl<string | null>(null, Validators.required),
-    numberOfDoors: new FormControl<number | null>(null, Validators.required),
-    color: new FormControl<string | null>(null, Validators.required),
-    productionYear: new FormControl<number | null>(null, Validators.required),
-    fuelConsumption: new FormControl<number | null>(null, Validators.required),
-    price: new FormControl<number | null>(null, Validators.required),
-    //available: new FormControl<boolean | null>(null, Validators.required),
-    lastServiceDate: new FormControl<string | null>(null, Validators.required),
-    nextServiceDate: new FormControl<string | null>(null),
-  })
+  // constructor(private readonly fb: FormBuilder, private readonly carApi: CarApi) {}
 
-  private readonly destroy$ = new Subject<void>()
+  // convertFormToDto(form: CarFormModel): Car {
+  //   return {
+  //     _id: form.controls.id.value,
+  //     brand: form.controls.brand.value,
+  //     model: form.controls.model.value,
+  //     number_of_seats: form.controls.number_of_seats.value,
+  //     horse_power: form.controls.horse_power.value,
+  //     gearbox: form.controls.gearbox.value,
+  //     trunk: form.controls.trunk.value,
+  //     fuel_type: form.controls.fuel_type.value,
+  //     number_of_doors: form.controls.number_of_doors.value,
+  //     color: form.controls.color.value,
+  //     production_year: form.controls.production_year.value,
+  //     fuel_consumption: form.controls.fuel_consumption.value,
+  //     price: form.controls.price.value,
+  //     available: form.controls.available.value,
+  //     image_url: form.controls.image_url.value,
+  //     type: form.controls.type.value
+  //   }
+  // }
 
-  constructor(private readonly fb: FormBuilder) {}
-
-  ngOnInit() {
-    this.carForm.statusChanges.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      if(this.carForm.valid) {
-        console.log(this.convertFormToDto(this.carForm))
-      }
-    })
-  }
-
-  convertFormToDto(form: CarFormModel): CarDto {
-    return {
-      id: form.controls.id.value,
-      brand: form.controls.brand.value,
-      model: form.controls.model.value,
-      numberOfSeats: form.controls.numberOfSeats.value,
-      horsePower: form.controls.horsePower.value,
-      gearbox: form.controls.gearbox.value,
-      trunk: form.controls.trunk.value,
-      fuelType: form.controls.fuelType.value,
-      numberOfDoors: form.controls.numberOfDoors.value,
-      color: form.controls.color.value,
-      productionYear: form.controls.productionYear.value,
-      fuelConsumption: form.controls.fuelConsumption.value,
-      price: form.controls.price.value,
-      //available: form.controls.available.value,
-      lastServiceDate: form.controls.lastServiceDate.value,
-      nextServiceDate: 'todo'
-    }
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next()
-    this.destroy$.complete()
-  }
+  // sendForm() {
+  //     this.carApi.addCar(this.convertFormToDto(this.carForm)).subscribe()
+  // }
 }

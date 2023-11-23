@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>{{ mode === 'add' ? 'Dodawanie nowej konserwacji': "Edycja istniejącej konserwacji"}}</h1>
+<div mat-dialog-content style="padding-top: 10px;">
+    <div class="form">
+
+      <mat-form-field>
+        <mat-label>Data wykonania</mat-label>
+        <input matInput [matDatepicker]="picker" [formControl]="maintenanceForm.controls.date">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Typ</mat-label>
+            <input matInput [formControl]="maintenanceForm.controls.type" required>
+            <mat-error *ngIf="maintenanceForm.controls.type.invalid">{{ "Pole obowiązkowe" }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Opis</mat-label>
+            <textarea matInput [formControl]="maintenanceForm.controls.description" required></textarea>
+            <mat-error *ngIf="maintenanceForm.controls.description.invalid">{{ "Pole obowiązkowe" }}</mat-error>
+        </mat-form-field>
+    </div>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="closeModal()">Anuluj</button>
+  <button mat-button (click)="sendForm()">Zapisz</button>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

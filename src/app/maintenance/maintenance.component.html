@@ -1,0 +1,6 @@
+<div class="column-container">
+    <p class="header-text">{{ "Konserwacje" }}</p>
+    <ng-container *ngIf="maintenances$ | async as maintenances">
+        <app-maintenance-table (maintananceChanged)="handleMaintananceChanged($event)" (sendDeleteReq)="handleMaintananceDeleted($event)" class="table" [maintenancesData]="maintenances"></app-maintenance-table>
+    </ng-container>
+</div>

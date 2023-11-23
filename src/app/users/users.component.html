@@ -1,4 +1,7 @@
 <div class="column-container">
+    <p class="header-text">{{ "Użytkownicy" }}</p>
+    <button mat-raised-button color="primary" (click)="openDialog()">Dodaj użytkownika</button>
+
     <ng-container *ngIf="users$ | async as users">
         <app-user-table class="table" [usersData]="users"></app-user-table>
     </ng-container>

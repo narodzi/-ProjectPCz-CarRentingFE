@@ -7,6 +7,7 @@ import { UserAccountComponent } from './user-account/user-account.component';
 import { UsersComponent } from './users/users.component';
 import { HomeAdminDashboardComponent } from './home-admin/dashboard/home-admin-dashboard.component';
 import { CarPageComponent } from './car/car-page/car-page.component';
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeDashboardComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'car/:id', component: CarPageComponent },
   { path: 'user_account', component: UserAccountComponent },
   { path: 'users', component: UsersComponent },
+  { path: 'maintenance', component: MaintenanceComponent},
   { path: '', pathMatch: 'full', redirectTo: '/home'}
 ];
 

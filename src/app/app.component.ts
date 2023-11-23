@@ -25,6 +25,10 @@ export class AppComponent {
     this.router.navigate(['user_account'])
   }
 
+  goToMaintenance() {
+    this.router.navigate(['maintenance'])
+  }
+  
   goToMain() {
     this.router.navigate(['home'])
   }

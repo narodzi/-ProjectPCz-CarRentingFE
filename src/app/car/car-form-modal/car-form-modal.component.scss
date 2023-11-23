@@ -1,0 +1,18 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.add-button {
+  position: fixed;
+  right: 4em;
+  bottom: 4em;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: first baseline;
+  gap: 8px;
+}

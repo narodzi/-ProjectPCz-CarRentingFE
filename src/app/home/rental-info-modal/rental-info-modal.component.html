@@ -1,67 +1,85 @@
 <h1 mat-dialog-title>Szczegóły wypożyczenia</h1>
 <div mat-dialog-content>
-  <div class="car-container">
-    <div>
-      <p class="car-title">Citroen C4</p>
-      <img
-        style="width: 250px; border: solid 1px black; border-radius: 5px"
-        [src]="
-          'https://cdn.imagin.studio/getImage?&customer=img&make=citroen&modelFamily=c5-x&modelRange=c5-x&modelVariant=od&modelYear=2021&powerTrain=hybrid&transmission=0&bodySize=5&trim=eu&paintId=pspc0059&angle=01&zoomtype=fullscreen'
-        "
-      />
-    </div>  
-    <div style="display: flex; gap:10px;">
-      <div style="width: 100%;">
-      <p>
-        <span>Typ: </span>
-        <span>SUV</span>
-      </p>
-      <p>
-        <span>Liczba miejsc: </span>
-        <span>5</span>
-      </p>
-      <p>
-        <span>Liczb drzwi: </span>
-        <span>5</span>
-      </p>
-      <p>
-        <span>Konie mechaniczne: </span>
-        <span>110</span>
-      </p>
+  <ng-container *ngIf="car$ | async as car">
+    <div class="car-container">
+      <div>
+        <p class="car-title">{{ car.brand + ' ' + car.model }}</p>
+        <img
+          style="width: 250px; border: solid 1px black; border-radius: 5px"
+          [src]="car.image_url"
+        />
+      </div>
+        <div style="display: flex; gap:10px;">
+          <div style="width: 100%;">
+          <p>
+            <span>Typ: </span>
+            <span>{{ car.type }}</span>
+          </p>
+          <p>
+            <span>Liczba miejsc: </span>
+            <span>{{ car.number_of_seats }}</span>
+          </p>
+          <p>
+            <span>Liczb drzwi: </span>
+            <span>{{ car.number_of_doors }}</span>
+          </p>
+          <p>
+            <span>Konie mechaniczne: </span>
+            <span>{{ car.horse_power }}</span>
+          </p>
+        </div>
+        <div style="width: 100%;">
+          <p>
+            <span>Typ skrzyni biegów: </span>
+            <span>{{ car.gearbox }}</span>
+          </p>
+          <p>
+            <span>Pojemność bagażnika: </span>
+            <span>{{ car.gearbox }}</span>
+          </p>
+          <p>
+            <span>Rodzaj paliwa: </span>
+            <span>{{ car.fuel_type }}</span>
+          </p>
+          <p>
+            <span>Rok produkcji: </span>
+            <span>{{ car.production_year }}</span>
+          </p>
+        </div>
+        </div>
     </div>
-    <div style="width: 100%;">
-      <p>
-        <span>Typ skrzyni biegów: </span>
-        <span>Manualna</span>
-      </p>
-      <p>
-        <span>Pojemność bagażnika: </span>
-        <span>320</span>
-      </p>
-      <p>
-        <span>Rodzaj paliwa: </span>
-        <span>Benzyna</span>
-      </p>
-      <p>
-        <span>Rok produkcji: </span>
-        <span>2022</span>
-      </p>
-    </div>
-    </div>
-  </div>
+  </ng-container>
   <hr>
-  <div class="rental-info-container">
-    <div>
-      <p>10.11.2023 10:00</p>
-      <p>20.11.2023 10:00</p>
-      <p>Pozostało 10 dni</p>
+  <ng-container *ngIf="rental$ | async as rental">
+    <div class="rental-info-container">
+      <div>
+        <p>
+          <span>Data rozpoczęcia:</span>
+          <span>
+            {{ rental.start_date | date : 'd/M/y h:mm' }}
+          </span>
+        </p>
+        <p>
+          <span>Data zakończenia:</span>
+          <span>
+            {{ rental.end_date | date : 'd/M/y h:mm' }}
+          </span>
+        </p>
+        <p>Pozostało 10 dni</p>
+      </div>
+      <div>
+        <p>Status: Oczekujące</p>
+        <p>
+          <span>Cena: </span>
+          <span>{{ rental.price_overall + ' zł' }}</span>
+        </p>
+        <p>
+          <span>Kara: </span>
+          <span>{{ rental.penalty + ' zł' }}</span>
+        </p>
+      </div>
     </div>
-    <div>
-      <p>Status: Oczekujące</p>
-      <p>Cena: 1000zł</p>
-      <p>Kara: -</p>
-    </div>
-  </div>
+  </ng-container>
 </div>
 <div mat-dialog-actions align="end">
   <button mat-button (click)="closeModal()">Anuluj wypożyczenie</button>

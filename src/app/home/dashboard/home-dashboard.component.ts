@@ -4,14 +4,20 @@ import { RentalTableComponent } from '../../shared/components/rental-table/renta
 import { SearchFormComponent } from '../search-form/search-form.component';
 import { HomeDashboardNav } from './home-dasboard.models';
 import { SearchResultsComponent } from '../search-results/search-results.component';
-import { RentalSearchRequest, RentalSearchResponse } from 'src/app/shared/models/rental.model';
+import { Rental, RentalSearchRequest, RentalSearchResponse } from 'src/app/shared/models/rental.model';
 import { FilteredApi } from 'src/app/shared/api/filtered.api';
+import { RentalApi } from 'src/app/shared/api/rental.api';
+import { CommonModule } from '@angular/common';
+import { Observable, map, tap } from 'rxjs';
+import { compareRentalByStartDate } from 'src/app/shared/utils/date-time.adapter';
+import { Car } from 'src/app/shared/models/car.model';
+import { CarApi } from 'src/app/shared/api/car.api';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home-dashboard.component.html',
   styleUrls: ['./home-dashboard.component.scss'],
-  imports: [MaterialModule, RentalTableComponent, SearchFormComponent, SearchResultsComponent],
+  imports: [CommonModule, MaterialModule, RentalTableComponent, SearchFormComponent, SearchResultsComponent],
   standalone: true
 })
 export class HomeDashboardComponent {
@@ -21,7 +27,18 @@ export class HomeDashboardComponent {
   rentalFilters?: RentalSearchRequest
   rentalSearchResults?: RentalSearchResponse[]
   
-  constructor(private readonly filteredApi: FilteredApi) {}
+  rentals$: Observable<Rental[]>
+  currentRentalCar$: Observable<Car> | undefined
+
+  constructor(private readonly filteredApi: FilteredApi, private readonly rentalApi: RentalApi, private readonly carApi: CarApi) {
+    this.rentals$ = this.rentalApi.getRentalsForUser().pipe(map(rentals => rentals.sort(compareRentalByStartDate)), tap(rental => {
+      const carId = rental.at(0)?.car_id
+      if(carId) {
+        this.currentRentalCar$ = this.carApi.getCar(carId)
+      }
+    }))
+
+  }
 
   handleFormFilled(filledFilters: RentalSearchRequest) {
     console.log(filledFilters)
