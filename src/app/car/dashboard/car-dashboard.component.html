@@ -1,5 +1,6 @@
 <div class="column-container">
-    <button mat-raised-button color="primary" (click)="goToAddCarPage()">Dodaj samochód</button>
+    <p class="header-text">{{ "Samochody"}}</p>
+    <button mat-raised-button color="primary" (click)="openDialog()">Dodaj samochód</button>
 
       <ng-container *ngIf="cars$ | async as cars">
         <mat-tab-group class="tabs">

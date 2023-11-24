@@ -9,6 +9,17 @@ export type RentalDto = Partial<{
     readonly penalty: number | null
 }>
 
+export type Rental = Partial<{
+    readonly _id: string | null
+    readonly car_id: string | null
+    readonly user_id: string | null
+    readonly start_date: string | null
+    readonly end_date: string | null
+    readonly price_overall: number | null
+    readonly is_canceled: boolean | null
+    readonly penalty: number | null
+}>
+
 export type RentalSearchRequest = Partial<{
     start_date: string
     end_date: string

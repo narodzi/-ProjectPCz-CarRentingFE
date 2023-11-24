@@ -49,8 +49,8 @@ export class SearchFormComponent implements OnInit {
     carSeatNumber: new FormControl<number | null>(null, [Validators.min(1), Validators.max(10)]),
     carDoorsNumber: new FormControl<number | null>(null, [Validators.min(2), Validators.max(5)]),
     minimalTrunkSize: new FormControl<number | null>(null, Validators.min(1)),
-    minimalPrice: new FormControl<number | null>(null, [Validators.required, Validators.min(1)]),
-    maximalPrice: new FormControl<number | null>(null, [Validators.required, Validators.min(1)]),
+    minimalPrice: new FormControl<number | null>(null, [Validators.min(1)]),
+    maximalPrice: new FormControl<number | null>(null, [Validators.min(1)]),
   }, {
   })
 

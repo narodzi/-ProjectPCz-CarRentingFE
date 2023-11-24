@@ -16,4 +16,16 @@ export class CarApi {
         return this.http.get<Car>(`http://localhost:4300/cars/${carId}`)
     }
 
+    addCar(car: Car) {
+        return this.http.post<number>('http://localhost:4300/cars', car)
+    }
+
+    updateCar(car: Car, carId: string) {
+        return this.http.put<number>(`http://localhost:4300/cars/${carId}`, car)
+    }
+
+    deleteCar(carId: string) {
+        return this.http.delete<number>(`http://localhost:4300/cars/${carId}`)
+    }
+
 }

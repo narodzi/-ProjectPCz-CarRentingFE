@@ -17,7 +17,7 @@ import { MaterialModule } from 'src/app/shared/modules/material.module';
 })
 export class CarTableComponent {
   @Input() carData: Car[] | undefined = []
-  displayedColumns = ['type', 'brand', 'model', 'fuel_type', 'gearbox', 'production_year', 'price']
+  displayedColumns = ['type', 'brand', 'model', 'fuel_type', 'gearbox', 'production_year', 'price', 'actions']
 
   constructor(private readonly router: Router) {}
 

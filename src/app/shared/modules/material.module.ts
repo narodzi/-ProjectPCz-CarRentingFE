@@ -16,6 +16,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatChipsModule } from '@angular/material/chips'
 import { MatTooltipModule } from '@angular/material/tooltip'
 import { MatRippleModule } from '@angular/material/core';
+import { MatListModule } from '@angular/material/list'
+import { MatDividerModule } from '@angular/material/divider'
+import { MatRadioModule } from '@angular/material/radio'
 
 @NgModule({
   imports: [NgxMatDatetimePickerModule,
@@ -35,7 +38,10 @@ import { MatRippleModule } from '@angular/material/core';
     MatIconModule,
     MatChipsModule,
     MatTooltipModule,
-    MatRippleModule
+    MatRippleModule,
+    MatListModule,
+    MatDividerModule,
+    MatRadioModule
   ],
   exports: [NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
@@ -54,7 +60,10 @@ import { MatRippleModule } from '@angular/material/core';
     MatIconModule,
     MatChipsModule,
     MatTooltipModule,
-    MatRippleModule
+    MatRippleModule,
+    MatListModule,
+    MatDividerModule,
+    MatRadioModule
   ],
 })
 export class MaterialModule {}

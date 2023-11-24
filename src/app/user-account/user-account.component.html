@@ -1,54 +1,60 @@
-<div class="column-container">
-    <mat-card class="card">
-        <mat-card-header>
-          <mat-card-title> Informacje o koncie </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <p>
-            <span>Nazwa użytkownika: </span>
-            <span>user1</span>
-          </p>
-          <p>
-            <span>Imię: </span>
-            <span>Marek</span>
-          </p>
-          <p>
-            <span>Nazwisko: </span>
-            <span>Nowak</span>
-          </p>
-          <p>
-            <span>Numer prawa jazdy: </span>
-            <span>ABC123456789</span>
-          </p>
-          <p>
-            <span>Kraj: </span>
-            <span>Polska</span>
-          </p>
-          <p>
-            <span>Miasto: </span>
-            <span>Częstochowa</span>
-          </p>
-          <p>
-            <span>Ulica i numer domu/mieszkania </span>
-            <span>al.NMP 100/20</span>
-          </p>
-          <p>
-            <span>Kod pocztowy: </span>
-            <span>42-200</span>
-          </p>
-          <p>
-            <span>Numer telefonu: </span>
-            <span>123 456 789</span>
-          </p>
-        </mat-card-content>
-      </mat-card>
+<ng-container *ngIf="user$ | async as user">
+  <div class="column-container">
       <mat-card class="card">
-        <mat-card-header>
-          <mat-card-title> Saldo </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            150, 00 pln
-        </mat-card-content>
-      </mat-card>
-</div>
+          <mat-card-header>
+            <mat-card-title> Informacje o koncie </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              <span>Nazwa użytkownika: </span>
+              <span>user1</span>
+            </p>
+            <p>
+              <span>Imię: </span>
+              <span>Marek</span>
+            </p>
+            <p>
+              <span>Nazwisko: </span>
+              <span>Nowak</span>
+            </p>
+            <p>
+              <span>Numer prawa jazdy: </span>
+              <span>{{ user.licence_number }}</span>
+            </p>
+            <p>
+              <span>Kraj: </span>
+              <span>{{ user.country }}</span>
+            </p>
+            <p>
+              <span>Miasto: </span>
+              <span>{{ user.city }}</span>
+            </p>
+            <p>
+              <span>Ulica i numer domu/mieszkania </span>
+              <span>{{ 'Ulica ' + user.house_number }}</span>
+              <span *ngIf="user.apartment_number">{{ '/' + user.apartment_number }}</span>
+            </p>
+            <p>
+              <span>Kod pocztowy: </span>
+              <span>{{ user.postal_code }}</span>
+            </p>
+            <p>
+              <span>Numer telefonu: </span>
+              <span>{{ user.phone_number }}</span>
+            </p>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="card">
+          <mat-card-header>
+            <mat-card-title> Saldo </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+              <div class="row">
+                <p>{{ user.wallet_balance }}</p>
+                <button mat-raised-button (click)="openDialog()">ZASIL +</button>
+              </div>
+          </mat-card-content>
+        </mat-card>
+  </div>
+</ng-container>
 

@@ -1,14 +1,46 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { User } from "../models/user.model";
+import { KeycloakService } from "../auth/keycloak.service";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserApi {
-    constructor(private readonly http: HttpClient) {}
+    constructor(private readonly http: HttpClient, private readonly keycloakService: KeycloakService) {}
+
+    // Admin role v
 
     getUsers() {
         return this.http.get<User[]>('http://localhost:4300/users')
     }
+
+    getUser(userId: string) {
+        return this.http.get<User>(`http://localhost:4300/users/${userId}`)
+    }
+
+    deleteUser(userId: string) {
+        return this.http.delete<number>(`http://localhost:4300/users/${userId}`)
+    }
+
+    addUser(user: User) {
+        return this.http.post<number>(`http://localhost:4300/users`, user)
+    }
+
+    updateUser(user: User, userId: string) {
+        return this.http.put<number>(`http://localhost:4300/users/${userId}`, user)
+    }
+
+    // User role v
+
+    getUserinfoAsUser() {
+        const userId = this.keycloakService.getUserId()
+        return this.http.get<User>(`http://localhost:4300/users/${userId}`)
+    }
+
+    addMoneyToWallerasUser(amount: number) {
+        const userId = this.keycloakService.getUserId()
+        return this.http.put<User>(`http://localhost:4300/users/${userId}/addMoney?amount=${amount}`, {})
+    }
+
 }

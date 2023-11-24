@@ -1,9 +1,10 @@
 <mat-toolbar class="toolbar" color="primary">
     <span class="logo" (click)="goToMain()">Car Rental</span>
+    <button mat-flat-button color="primary" (click)="goToUserAccount()">Konto (UserView)</button>
     <button mat-flat-button color="primary" (click)="goToAdminHomePage()">Home (AdminView)</button>
     <button mat-flat-button color="primary" (click)="goToCarPage()">Samochody (AdminView)</button>
     <button mat-flat-button color="primary" (click)="goToUsersPage()">Użytkownicy (AdminView)</button>
-    <button mat-flat-button color="primary" (click)="goToUserAccount()">Konto (UserView)</button>
+    <button mat-flat-button color="primary" (click)="goToMaintenance()">Konserwacja (AdminView)</button>
     <span class="log-out">Wyloguj</span>
     <span class="balance">Saldo: 150,00 zł</span>
 </mat-toolbar>

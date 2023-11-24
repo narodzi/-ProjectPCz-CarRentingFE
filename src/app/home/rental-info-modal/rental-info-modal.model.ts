@@ -1,3 +1,4 @@
 export type RenatalInfoModalModel = {
-    content: string
+    rentalId: string
+    carId: string
 }

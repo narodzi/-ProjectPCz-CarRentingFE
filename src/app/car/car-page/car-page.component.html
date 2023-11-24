@@ -1,6 +1,78 @@
 <ng-container *ngIf="car$; empty">
     <ng-container *ngIf="car$ | async as car">
-        <pre>{{ car | json }}</pre>
+        <div class="column-container">
+            <mat-card>
+                <mat-card-content class="card-content">
+                    <img class="img" [src]="car.image_url">
+                    <div class="buttons">
+                        <button mat-raised-button color="primary" (click)="openDialog(car)">Edytuj samochód</button>
+                        <button mat-raised-button color="primary" (click)="openDeleteDialog()">Usuń samochód</button>
+                        <button mat-raised-button color="primary" (click)="openMaintenanceDialog()">Dodaj konserwację</button>
+                    </div>
+                    <div class="paragraphs">
+                        <p class="property-row">
+                            <span>Marka</span>
+                            <span>{{ car.brand }}</span>
+                        </p>
+                        <p class="property-row">
+                            <span>Model</span>
+                            <span>{{ car.model }}</span>
+                        </p>
+                        <p class="property-row"> 
+                            <span>Typ</span>
+                            <span>{{ car.type }}</span>
+                        </p>
+                        <p class="property-row">
+                            <span>Rok produkcji</span>
+                            <span>{{ car.production_year }}</span>
+                        </p>
+                        <p class="property-row">
+                            <span>Skrzynia biegów</span>
+                            <span>{{ car.gearbox }}</span>
+                        </p>
+                        <p class="property-row">
+                            <span>Rodzaj paliwa</span>
+                            <span>{{ car.fuel_type }}</span>
+                        </p>
+                        <p class="property-row">
+                            <span>Liczba siedzeń</span>
+                            <span>{{ car.number_of_seats }}</span>
+                        </p>
+                        <p class="property-row">
+                            <span>Liczba koni</span>
+                            <span>{{ car.horse_power }}</span>
+                        </p>
+                        <p class="property-row">
+                            <span>Bagażnik</span>
+                            <span>{{ car.trunk }}</span>
+                        </p>
+                        <p class="property-row">
+                            <span>Liczba drzwi</span>
+                            <span>{{ car.number_of_doors }}</span>
+                        </p>
+                        <p class="property-row">
+                            <span>Kolor</span>
+                            <span>{{ car.color }}</span>
+                        </p>
+                        <p class="property-row">
+                            <span>Zużycie paliwa</span>
+                            <span>{{ car.fuel_consumption }}</span>
+                        </p>
+                        <p class="property-row">
+                            <span>Cena</span>
+                            <span>{{ car.price }}</span>
+                        </p>
+                    </div>
+                    <h2>Konsweracje tego samochodu:</h2>
+                    <ng-container *ngIf="maintanances$ | async as maintanances">
+                        <app-maintenance-table [maintenancesData]="maintanances"
+                            (maintananceChanged)="handleMaintenancesChanged()"
+                            (sendDeleteReq)="deleteMaintenance($event)"
+                        ></app-maintenance-table>
+                    </ng-container>
+                </mat-card-content>
+            </mat-card>
+        </div>
     </ng-container>
 </ng-container>
 

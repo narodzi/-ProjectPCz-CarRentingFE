@@ -1,0 +1,11 @@
+<h1 mat-dialog-title>O ile chcesz doładować swoje konto?</h1>
+<div mat-dialog-content style="padding-top: 10px;">
+  <mat-form-field style="width: 100%;">
+    <mat-label>Kwota doładowania</mat-label>
+    <input type="number" matInput [formControl]="amountControl">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="closeModal()">Anuluj</button>
+  <button mat-button (click)="save()" [disabled]="!amountControl.valid" >Ok</button>
+</div>

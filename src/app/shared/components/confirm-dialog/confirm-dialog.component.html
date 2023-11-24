@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Uwaga!</h1>
+<div mat-dialog-content style="padding-top: 10px;">
+    <p>{{ content }}</p>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="discard()">Anuluj</button>
+  <button mat-button (click)="confirm()">Potwierdź</button>
+</div>
