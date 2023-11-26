@@ -7,7 +7,7 @@
     <mat-chip-listbox>
         <mat-chip *ngIf="filters?.start_date && filters?.end_date">
             Dostępność od: 
-            <span>{{ (filters?.start_date | date : 'dd-MM-yyyy hh:mm') + ' - ' + (filters?.end_date | date : 'dd-MM-yyyy hh:mm') }}</span>
+            <span>{{ (filters?.start_date | date : 'dd.MM.y') + ' - ' + (filters?.end_date | date : 'dd.MM.y') }}</span>
         </mat-chip>
         <mat-chip *ngIf="filters?.brand">
             {{ filters?.brand }}
@@ -54,5 +54,5 @@
       </mat-chip-listbox>
 </div>
 <div class="results-container">
-    <app-search-result-card *ngFor="let result of rentalSearchResults" [singleResult]="result"></app-search-result-card>
+    <app-search-result-card *ngFor="let result of rentalSearchResults" [singleResult]="result" (sendChoosenCarId)="handleReservation($event)"></app-search-result-card>
 </div>

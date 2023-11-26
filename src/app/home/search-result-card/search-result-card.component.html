@@ -54,6 +54,6 @@
     </mat-card-content>
     <mat-card-actions align="end">
       <span *ngIf="singleResult?.price_overall" class="price-text">{{ singleResult?.price_overall + ' zł' }}</span>
-      <button mat-raised-button color="primary">Rezerwuj</button>
+      <button mat-raised-button (click)="sendCarId()" color="primary">Rezerwuj</button>
     </mat-card-actions>
 </mat-card>

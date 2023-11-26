@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModu
 import { converStringToIso } from '../../shared/utils/date-time.adapter';
 import { CommonModule } from '@angular/common';
 import { RentalSearchRequest } from 'src/app/shared/models/rental.model';
+import { FilteredApi } from 'src/app/shared/api/filtered.api';
 
 export type SearchFormModel = FormGroup<{
   startDate: FormControl<string | null>
@@ -46,17 +47,17 @@ export class SearchFormComponent implements OnInit {
     carGearboxType: new FormControl<string | null>(null),
     carFuelType: new FormControl<string | null>(null),
     carMinimalHorsePower: new FormControl<number | null>(null, Validators.min(50)),
-    carSeatNumber: new FormControl<number | null>(null, [Validators.min(1), Validators.max(10)]),
-    carDoorsNumber: new FormControl<number | null>(null, [Validators.min(2), Validators.max(5)]),
+    carSeatNumber: new FormControl<number | null>(null),
+    carDoorsNumber: new FormControl<number | null>(null),
     minimalTrunkSize: new FormControl<number | null>(null, Validators.min(1)),
     minimalPrice: new FormControl<number | null>(null, [Validators.min(1)]),
     maximalPrice: new FormControl<number | null>(null, [Validators.min(1)]),
   }, {
   })
 
+  parameters$ = this.filteredApi.getFilteredParameters()
 
-
-  constructor(private readonly fb: FormBuilder) {}
+  constructor(private readonly fb: FormBuilder, private readonly filteredApi: FilteredApi) {}
 
   ngOnInit() {
   }

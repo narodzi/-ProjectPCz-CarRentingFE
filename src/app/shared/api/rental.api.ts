@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Rental } from "../models/rental.model";
+import { Rental, RentalRequest } from "../models/rental.model";
 import { KeycloakService } from "../auth/keycloak.service";
 
 @Injectable({
@@ -20,6 +20,14 @@ export class RentalApi {
     getRentalsForUser() {
         const userId = this.keycloakService.getUserId()
         return this.http.get<Rental[]>(`http://localhost:4300/rentals/user/${userId}`)
+    }
+
+    cancelRental(rentalId: string) {
+        return this.http.post<string>(`http://localhost:4300/rentals/cancel/${rentalId}`, {})
+    }
+
+    addRental(rental: RentalRequest) {
+        return this.http.post<string>(`http://localhost:4300/rentals/`, rental)
     }
 
 }

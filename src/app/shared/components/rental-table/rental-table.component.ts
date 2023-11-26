@@ -27,8 +27,7 @@ export class RentalTableComponent {
     'end_date',
     'is_canceled',
     'price_overall',
-    'actions',
-    'penalty'
+    'actions'
   ]
   displayedColumnsUSER = [
     'start_date',

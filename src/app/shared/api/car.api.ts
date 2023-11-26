@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Car } from "../models/car.model";
+import { Car, CarWithStatus } from "../models/car.model";
 
 @Injectable({
     providedIn: 'root'
@@ -10,6 +10,10 @@ export class CarApi {
 
     getCars() {
         return this.http.get<Car[]>('http://localhost:4300/cars')
+    }
+
+    getCarsWithStatus() {
+        return this.http.get<CarWithStatus[]>('http://localhost:4300/cars/with_status/')
     }
 
     getCar(carId: string) {

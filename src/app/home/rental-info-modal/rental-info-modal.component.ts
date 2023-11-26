@@ -18,6 +18,8 @@ import { Rental } from 'src/app/shared/models/rental.model';
 })
 export class RentalInfoModalComponent {
 
+  rentalId: string
+
   car$: Observable<Car>
   rental$: Observable<Rental>
 
@@ -27,11 +29,18 @@ export class RentalInfoModalComponent {
     public dialogRef: MatDialogRef<RentalInfoModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: RenatalInfoModalModel,
   ) {
+    this.rentalId = data.rentalId
     this.car$ = carApi.getCar(data.carId)
     this.rental$ = rentalApi.getRental(data.rentalId)
   }
 
   closeModal(): void {
     this.dialogRef.close();
+  }
+
+  cancelRental() {
+    this.rentalApi.cancelRental(this.rentalId).subscribe({
+      next: () => this.dialogRef.close()
+    })
   }
 }

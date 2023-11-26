@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CarApi } from 'src/app/shared/api/car.api';
 import { CarFormModalComponent } from '../car-form-modal/car-form-modal.component';
+import { CarWithStatus } from 'src/app/shared/models/car.model';
 
 @Component({
   selector: 'app-car',
@@ -16,7 +17,7 @@ export class CarDashboardComponent {
      public dialog: MatDialog
      ) {}
 
-  cars$ = this.carApi.getCars()
+  cars$ = this.carApi.getCarsWithStatus()
 
   goToAddCarPage() {
     this.router.navigate(['form'], { relativeTo: this.route})
@@ -32,5 +33,18 @@ export class CarDashboardComponent {
         this.cars$ = this.carApi.getCars()
       }
     })
+  }
+
+  filterCars(cars: CarWithStatus[], mode?: string) {
+    if(mode === 'available') {
+      return cars.filter(c => c.status === 'available')
+    }
+    if(mode === 'off') {
+      return cars.filter(c => c.status === 'off')
+    }
+    if(mode === 'rented') {
+      return cars.filter(c => c.status === 'rented')
+    }
+    return cars
   }
 }
