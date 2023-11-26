@@ -5,16 +5,16 @@
       <ng-container *ngIf="cars$ | async as cars">
         <mat-tab-group class="tabs">
             <mat-tab label="Wszystkie">
-              <app-car-table [carData]="cars"></app-car-table>
+              <app-car-table [carData]="filterCars(cars)"></app-car-table>
             </mat-tab>
             <mat-tab label="Dostępne"> 
-              <app-car-table [carData]="cars"></app-car-table>
+              <app-car-table [carData]="filterCars(cars, 'available')"></app-car-table>
             </mat-tab>
             <mat-tab label="Aktualnie wypożyczone">
-              <app-car-table [carData]="cars"></app-car-table>
+              <app-car-table [carData]="filterCars(cars, 'rented')"></app-car-table>
             </mat-tab>
             <mat-tab label="Wyłączone z użytku">
-              <app-car-table [carData]="cars"></app-car-table>
+              <app-car-table [carData]="filterCars(cars, 'off')"></app-car-table>
             </mat-tab>
         </mat-tab-group>
       </ng-container>

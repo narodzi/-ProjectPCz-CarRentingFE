@@ -73,15 +73,13 @@
           <span>Cena: </span>
           <span>{{ rental.price_overall + ' zł' }}</span>
         </p>
-        <p>
-          <span>Kara: </span>
-          <span>{{ rental.penalty + ' zł' }}</span>
-        </p>
       </div>
     </div>
   </ng-container>
 </div>
 <div mat-dialog-actions align="end">
-  <button mat-button (click)="closeModal()">Anuluj wypożyczenie</button>
+  <ng-container *ngIf="rental$ | async as rental">
+    <button *ngIf="!rental.is_canceled"  mat-button (click)="cancelRental()">Anuluj wypożyczenie</button>
+  </ng-container>
   <button mat-button (click)="closeModal()">Close</button>
 </div>

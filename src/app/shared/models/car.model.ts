@@ -16,3 +16,17 @@ export type Car = Partial<{
     readonly image_url: string | null
     readonly type: string | null
 }>
+
+export type CarWithStatus = Partial<{
+    readonly image_url: string | null
+    readonly id: string | null
+    readonly type: string | null
+    readonly brand: string | null
+    readonly model: string | null
+    readonly fuel_type: string | null
+    readonly gearbox: string | null
+    readonly production_year: number | null
+    readonly price: number | null
+    readonly available: boolean | null
+    readonly status: string | null
+}>

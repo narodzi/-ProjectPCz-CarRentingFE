@@ -6,7 +6,7 @@ export function converStringToIso(stringDate?: string | null) {
     return null;
   }
   const jsDate = new Date(stringDate);
-  return DateTime.fromJSDate(jsDate).toISO();
+  return DateTime.fromJSDate(jsDate).toISODate();
 }
 
 

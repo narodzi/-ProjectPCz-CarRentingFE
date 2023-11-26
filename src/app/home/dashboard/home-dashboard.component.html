@@ -13,7 +13,7 @@
                   <img style="width: 250px; border: solid 1px black; border-radius: 5px;" [src]="currentRental.car?.image_url"/>
                   <div class="info">
                     <p class="car-header">{{ currentRental.car?.brand + ' ' + currentRental.car?.model }}</p>
-                    <p class="rental-date">{{ (currentRental.rental?.start_date | date : 'd.M.y h:mm') + ' - ' + (currentRental.rental?.end_date | date : 'd.M.y h:mm') }}</p>
+                    <p class="rental-date">{{ (currentRental.rental?.start_date | date : 'dd.MM.y') + ' - ' + (currentRental.rental?.end_date | date : 'dd.MM.y') }}</p>
                   </div>
                     <div class="status">
                       <img style="width: 50px; margin-bottom: 5px;" [src]="'assets/pending-icon.svg'"/>

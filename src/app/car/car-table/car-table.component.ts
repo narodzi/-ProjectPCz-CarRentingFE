@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Car } from 'src/app/shared/models/car.model';
+import { Car, CarWithStatus } from 'src/app/shared/models/car.model';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
 
 @Component({
@@ -16,7 +16,7 @@ import { MaterialModule } from 'src/app/shared/modules/material.module';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CarTableComponent {
-  @Input() carData: Car[] | undefined = []
+  @Input() carData: CarWithStatus[] | undefined = []
   displayedColumns = ['type', 'brand', 'model', 'fuel_type', 'gearbox', 'production_year', 'price', 'actions']
 
   constructor(private readonly router: Router) {}

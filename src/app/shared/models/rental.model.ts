@@ -6,7 +6,6 @@ export type RentalDto = Partial<{
     readonly endDate: string | null
     readonly priceOverall: number | null
     readonly status: string | null
-    readonly penalty: number | null
 }>
 
 export type Rental = Partial<{
@@ -17,7 +16,6 @@ export type Rental = Partial<{
     readonly end_date: string | null
     readonly price_overall: number | null
     readonly is_canceled: boolean | null
-    readonly penalty: number | null
 }>
 
 export type RentalSearchRequest = Partial<{
@@ -51,4 +49,10 @@ export type RentalSearchResponse = Partial<{
     production_year: number,
     fuel_consumption: number,
     price_overall: number
+}>
+
+export type RentalRequest = Partial<{
+    car_id: string
+    start_date: string
+    end_date: string
 }>

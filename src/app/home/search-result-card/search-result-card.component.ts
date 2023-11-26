@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
 import { RentalSearchResponse } from 'src/app/shared/models/rental.model';
@@ -12,4 +12,12 @@ import { RentalSearchResponse } from 'src/app/shared/models/rental.model';
 })
 export class SearchResultCardComponent {
   @Input() singleResult: RentalSearchResponse | undefined
+
+  @Output() sendChoosenCarId = new EventEmitter<string>()
+
+  sendCarId() {
+    if(this.singleResult) {
+      this.sendChoosenCarId.emit(this.singleResult._id)
+    }
+  }
 }
