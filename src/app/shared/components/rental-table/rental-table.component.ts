@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Rental } from '../../models/rental.model';
 import { MaterialModule } from '../../modules/material.module';
 import { MatDialog } from '@angular/material/dialog';
@@ -25,6 +25,8 @@ export class RentalTableComponent implements OnInit, AfterViewInit {
   RentalTableMode = RentalTableMode
   @Input() mode: RentalTableMode = RentalTableMode.USER
   @Input() rentalData: Rental[] = []
+
+  @Output() changed = new EventEmitter<boolean>()
 
   displayedColumnsADMIN = [
     'car_id',
@@ -67,5 +69,11 @@ export class RentalTableComponent implements OnInit, AfterViewInit {
     const dialogRef = this.dialog.open(RentalInfoAdminModalComponent, {
       data: {rentalId: rental._id, carId: rental.car_id, userId: rental.user_id},
     });
+
+    dialogRef.afterClosed().subscribe(resp => {
+      if(resp) {
+        this.changed.emit(true)
+      }
+    })
   }
 }

@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
 import { RenatalInfoModalModel } from './rental-info-modal.model';
 import { CarApi } from 'src/app/shared/api/car.api';
@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { Car } from 'src/app/shared/models/car.model';
 import { Rental } from 'src/app/shared/models/rental.model';
 import { getRentalStatus } from 'src/app/shared/utils/date-time.adapter';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-rental-info-modal',
@@ -28,6 +29,7 @@ export class RentalInfoModalComponent {
     private readonly carApi: CarApi,
     private readonly rentalApi: RentalApi,
     public dialogRef: MatDialogRef<RentalInfoModalComponent>,
+    private readonly dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: RenatalInfoModalModel,
   ) {
     this.rentalId = data.rentalId
@@ -40,8 +42,16 @@ export class RentalInfoModalComponent {
   }
 
   cancelRental() {
-    this.rentalApi.cancelRental(this.rentalId).subscribe({
-      next: () => this.dialogRef.close()
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent, {
+      data: { content: 'Czy na pewno chcesz anulować wypożyczenie?'}
+    })
+
+    confirmDialog.afterClosed().subscribe(resp => {
+      if(resp) {
+        this.rentalApi.cancelRental(this.rentalId).subscribe({
+          next: () => this.dialogRef.close()
+        })
+      }
     })
   }
 }

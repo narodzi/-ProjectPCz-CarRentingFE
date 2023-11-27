@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CarApi } from 'src/app/shared/api/car.api';
 import { CarFormModalComponent } from '../car-form-modal/car-form-modal.component';
 import { CarWithStatus } from 'src/app/shared/models/car.model';
+import { CarTableOutput } from '../car-table/car-table.component';
 
 @Component({
   selector: 'app-car',
@@ -46,5 +47,17 @@ export class CarDashboardComponent {
       return cars.filter(c => c.status === 'rented')
     }
     return cars
+  }
+
+  handleTableResponse(tr: CarTableOutput) {
+    if(tr.onoff === true) {
+      this.carApi.setCarEnabled(tr.carId).subscribe({
+        next: () => this.cars$ = this.carApi.getCarsWithStatus()
+      })
+    } else {
+      this.carApi.setCarDisabled(tr.carId).subscribe({
+        next: () => this.cars$ = this.carApi.getCarsWithStatus()
+      })
+    }
   }
 }

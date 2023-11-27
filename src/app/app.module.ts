@@ -14,7 +14,6 @@ import { NgxMatNativeDateModule } from '@angular-material-components/datetime-pi
 import { FilteredApi } from './shared/api/filtered.api';
 import { CarApi } from './shared/api/car.api';
 import { UserApi } from './shared/api/user.api';
-import { UserActivatedService } from './shared/auth/user-activated.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,6 @@ import { UserActivatedService } from './shared/auth/user-activated.service';
   ],
   providers: [
     KeycloakService,
-    UserActivatedService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

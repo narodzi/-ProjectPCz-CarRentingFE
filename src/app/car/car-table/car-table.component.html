@@ -38,8 +38,9 @@
           <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Akcje </th>
             <td mat-cell *matCellDef="let element">
-                <button mat-button (click)="handleRowClick(element)"><mat-icon [fontIcon]="'info'"></mat-icon></button>    
-                <button mat-button (click)="{}"><mat-icon [fontIcon]="'remove_red_eye'"></mat-icon></button>    
+                <button mat-button (click)="navigateToDetails(element)"><mat-icon [fontIcon]="'info'"></mat-icon></button>    
+                <button *ngIf="element.status !== 'off'" mat-button (click)="disableCar(element.id)"><mat-icon [fontIcon]="'stop_circle'"></mat-icon></button>    
+                <button *ngIf="element.status === 'off'" mat-button (click)="enableCar(element.id)"><mat-icon [fontIcon]="'play_circle'"></mat-icon></button>    
             </td>
           </ng-container>
 

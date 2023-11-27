@@ -4,6 +4,9 @@ import { CommonModule } from '@angular/common';
 import { UserApi } from '../shared/api/user.api';
 import { WalletBalanceModalComponent } from './wallet-balance-modal/wallet-balance-modal.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UserFormModalComponent } from '../users/user-form-modal/user-form-modal.component';
+import { User } from '../shared/models/user.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-account',
@@ -15,8 +18,14 @@ import { MatDialog } from '@angular/material/dialog';
 export class UserAccountComponent {
 
   user$ = this.userApi.getUserinfoAsUser()
+  userActivated: boolean = true
 
-  constructor(public dialog: MatDialog, private readonly userApi: UserApi) {}
+  constructor(public dialog: MatDialog, private readonly userApi: UserApi, private readonly router: Router) {
+    this.userApi.checkIfMongoExist().subscribe({
+      next: () => this.userActivated = true,
+      error: () => this.userActivated = false
+    })
+  }
 
   openDialog() {
     const dialogRef = this.dialog.open(WalletBalanceModalComponent);
@@ -25,6 +34,22 @@ export class UserAccountComponent {
       if(result) {        
         this.userApi.addMoneyToWallerasUser(result).subscribe({
           next: () => this.user$ = this.userApi.getUserinfoAsUser()
+        })
+      }
+    })
+  }
+
+  openEditDialog(user: User) {
+    const dialogRef = this.dialog.open(UserFormModalComponent, {
+      data: {
+        mode: 'add'
+      }
+    })
+
+    dialogRef.afterClosed().subscribe(resp => {
+      if(resp) {
+        this.userApi.addUser(resp).subscribe({
+          next: () => this.router.navigate(['/home'])
         })
       }
     })

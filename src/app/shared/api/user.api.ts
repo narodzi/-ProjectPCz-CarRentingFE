@@ -7,8 +7,17 @@ import { KeycloakService } from "../auth/keycloak.service";
     providedIn: 'root'
 })
 export class UserApi {
-    constructor(private readonly http: HttpClient, private readonly keycloakService: KeycloakService) {}
+    isUserExist!: boolean
+    constructor(private readonly http: HttpClient, private readonly keycloakService: KeycloakService) {
+        this.checkIfMongoExist().subscribe({
+            next: () => this.isUserExist = true,
+            error: () => this.isUserExist = false
+        })
+    }
 
+    get UserExistInMongo() {
+        return this.isUserExist
+    }
     // Admin role v
 
     getUsers() {
@@ -52,7 +61,6 @@ export class UserApi {
 
     checkIfMongoExist() {
         const userId = this.keycloakService.getUserId()
-        console.log(userId)
         return this.http.get<string>(`http://localhost:4300/users/mongo_exist/${userId}`)
     }
 }

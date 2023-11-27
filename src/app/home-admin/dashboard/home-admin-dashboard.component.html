@@ -19,7 +19,7 @@
     </div>
     <div class="column">
       <ng-container *ngIf="rentals$ | async as rentals">
-        <app-rental-table [mode]="RentalTableMode.ADMIN" [rentalData]="rentals"></app-rental-table>
+        <app-rental-table [mode]="RentalTableMode.ADMIN" [rentalData]="rentals" (changed)="handleRentalChanged($event)"></app-rental-table>
       </ng-container>
     </div>
 </div>

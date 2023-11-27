@@ -110,6 +110,8 @@
   </ng-container>
 </div>
 <div mat-dialog-actions align="end">
-  <button mat-button (click)="closeModal()">Anuluj wypożyczenie</button>
-  <button mat-button (click)="closeModal()">Close</button>
+  <ng-container *ngIf="rental$ | async as rental">
+    <button *ngIf="getRentalStatus(rental?.start_date!, rental?.end_date!, rental?.is_canceled!) === 'Nadchodzące'" mat-button (click)="openCancelRentalDialog(rental._id!)">Anuluj wypożyczenie</button>
+  </ng-container>
+  <button mat-button (click)="closeModal()">Zamknij</button>
 </div>

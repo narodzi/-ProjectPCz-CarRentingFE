@@ -18,4 +18,10 @@ export class HomeAdminDashboardComponent {
   rentals$ = this.rentalApi.getAllRentals()
 
   constructor(private readonly rentalApi: RentalApi) {}
+
+  handleRentalChanged(changed: boolean) {
+    if(changed) {
+      this.rentals$ = this.rentalApi.getAllRentals()
+    }
+  }
 }

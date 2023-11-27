@@ -32,4 +32,12 @@ export class CarApi {
         return this.http.delete<number>(`http://localhost:4300/cars/${carId}`)
     }
 
+    setCarEnabled(carId: string) {
+        return this.http.put<number>(`http://localhost:4300/cars/${carId}/set_status/available`, {})
+    }
+
+    setCarDisabled(carId: string) {
+        return this.http.put<number>(`http://localhost:4300/cars/${carId}/set_status/unavailable`, {})
+    }
+
 }

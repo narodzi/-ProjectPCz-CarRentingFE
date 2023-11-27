@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserActivatedService } from './shared/auth/user-activated.service';
+import { KeycloakService } from './shared/auth/keycloak.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,7 @@ import { UserActivatedService } from './shared/auth/user-activated.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private readonly userActivatedService: UserActivatedService, private readonly router: Router) {}
+  constructor(private readonly router: Router) {}
 
   goToAdminHomePage() {
     this.router.navigate(['home_admin'])
@@ -35,6 +35,6 @@ export class AppComponent {
   }
 
   logOut() {
-    alert('logout')
+    KeycloakService.logout()
   }
 }

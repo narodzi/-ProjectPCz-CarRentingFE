@@ -1,19 +1,32 @@
 <ng-container *ngIf="user$ | async as user">
   <div class="column-container">
+    <mat-card *ngIf="!userActivated" class="warning-card">
+      <mat-card-header>
+        <mat-card-title>
+          Konto nieaktywne
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Twoje konto nie jest jeszcze gotowe. Kliknij w przycisk poniżej, żeby uzupełnić niezbędne informacje.</p>
+      </mat-card-content>
+    </mat-card>
+    <div class="header-bar">
       <p class="header-text">Informacje o koncie</p>
+      <button *ngIf="!userActivated" mat-raised-button color="primary" (click)="openEditDialog(user)">Uzupełnij dane użytkownika</button>
+    </div>
       <mat-card class="card">
           <mat-card-content>
             <p>
               <span>Nazwa użytkownika: </span>
-              <span>user1</span>
+              <span>{{ user.username }}</span>
             </p>
             <p>
               <span>Imię: </span>
-              <span>Marek</span>
+              <span>{{ user.first_name }}</span>
             </p>
             <p>
               <span>Nazwisko: </span>
-              <span>Nowak</span>
+              <span>{{ user.last_name }}</span>
             </p>
             <p>
               <span>Numer prawa jazdy: </span>
@@ -28,7 +41,7 @@
               <span>{{ user.city }}</span>
             </p>
             <p>
-              <span>Ulica i numer domu/mieszkania </span>
+              <span>Ulica i numer domu: </span>
               <span>{{ user.street + ' ' + user.house_number }}</span>
               <span *ngIf="user.apartment_number">{{ '/' + user.apartment_number }}</span>
             </p>
@@ -46,7 +59,7 @@
         <mat-card class="card second-card">
           <mat-card-content>
               <div class="row">
-                <p>{{ user.wallet_balance }}</p>
+                <p>{{ user.wallet_balance + ' zł' }}</p>
                 <button mat-raised-button color="primary" (click)="openDialog()">ZASIL +</button>
               </div>
           </mat-card-content>
