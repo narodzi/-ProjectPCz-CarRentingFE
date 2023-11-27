@@ -1,15 +1,24 @@
-<h1 mat-dialog-title>{{ mode === 'add' ? 'Dodawanie nowego samochodu' : 'Edycja istaniejącego samochodu'}}</h1>
+<h1 mat-dialog-title>{{ mode === 'add' ? 'Dodawanie nowego samochodu' : 'Edycja istniejącego samochodu'}}</h1>
 <div mat-dialog-content style="padding-top: 10px;">
     <div class="form">
 
         <ng-container *ngIf="carForm.controls.image_url.value">
-            <img style="max-width: 300px;" [src]="carForm.controls.image_url.value"/>
+            <div class="row">
+                <img class="img" [src]="carForm.controls.image_url.value"/>
+            </div>
         </ng-container>
 
         <mat-form-field>
             <mat-label>Link do zdjęcia</mat-label>
             <input matInput [formControl]="carForm.controls.image_url" required>
         </mat-form-field>
+        
+        <div class="row">
+            <mat-radio-group [formControl]="carForm.controls.available">
+                <mat-radio-button [value]="true">Dostępny</mat-radio-button>
+                <mat-radio-button [value]="false">Niedostępny</mat-radio-button>
+            </mat-radio-group>
+        </div>
 
         <div class="row">
             <mat-form-field>
@@ -23,11 +32,26 @@
                 <input matInput [formControl]="carForm.controls.model" required>
                 <mat-error *ngIf="carForm.controls.brand.invalid">{{ "Pole obowiązkowe" }}</mat-error>
             </mat-form-field>
+        </div>
 
-            <mat-radio-group [formControl]="carForm.controls.available">
-                <mat-radio-button [value]="true">Dostępny</mat-radio-button>
-                <mat-radio-button [value]="false">Niedostępny</mat-radio-button>
-            </mat-radio-group>
+        <div class="row">
+            <mat-form-field>
+                <mat-label>Rodzaj paliwa</mat-label>
+                <mat-select [formControl]="carForm.controls.fuel_type">
+                    <mat-option *ngFor="let fuelTypeOption of fuelTypeOptions" [value]="fuelTypeOption">
+                        {{ fuelTypeOption }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+    
+            <mat-form-field>
+                <mat-label>Typ skrzyni biegów</mat-label>
+                <mat-select [formControl]="carForm.controls.gearbox">
+                    <mat-option *ngFor=" let gearBoxOption of gearBoxOptions" [value]="gearBoxOption">
+                        {{ gearBoxOption }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
 
         <div class="row">
@@ -69,26 +93,6 @@
                 <mat-error *ngIf="carForm.controls.brand.invalid">{{ "Pole obowiązkowe" }}</mat-error>
             </mat-form-field>
     
-        </div>
-
-        <div class="row">
-            <mat-form-field>
-                <mat-label>Rodzaj paliwa</mat-label>
-                <mat-select [formControl]="carForm.controls.fuel_type">
-                    <mat-option *ngFor="let fuelTypeOption of fuelTypeOptions" [value]="fuelTypeOption">
-                        {{ fuelTypeOption }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-    
-            <mat-form-field>
-                <mat-label>Typ skrzyni biegów</mat-label>
-                <mat-select [formControl]="carForm.controls.gearbox">
-                    <mat-option *ngFor=" let gearBoxOption of gearBoxOptions" [value]="gearBoxOption">
-                        {{ gearBoxOption }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
         </div>
 
         <div class="row">

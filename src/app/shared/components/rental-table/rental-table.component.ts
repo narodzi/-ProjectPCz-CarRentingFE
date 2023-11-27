@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Rental } from '../../models/rental.model';
 import { MaterialModule } from '../../modules/material.module';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,15 +7,21 @@ import { RentalTableMode } from './rental-table.model';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { RentalInfoAdminModalComponent } from 'src/app/home-admin/rental-info-admin-modal/rental-info-admin-modal.component';
+import { getRentalStatus } from '../../utils/date-time.adapter';
+import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MyCustomPaginatorIntl } from '../../utils/paginator-translate.service';
 
 @Component({
   selector: 'app-rental-table',
   templateUrl: './rental-table.component.html',
   styleUrls: ['./rental-table.component.scss'],
   standalone: true,
-  imports: [CommonModule, MaterialModule]
+  imports: [CommonModule, MaterialModule, MatPaginatorModule, MatTableModule],
+  providers: [{provide: MatPaginatorIntl, useClass: MyCustomPaginatorIntl}]
 })
-export class RentalTableComponent {
+export class RentalTableComponent implements OnInit, AfterViewInit {
+  getRentalStatus = getRentalStatus
   RentalTableMode = RentalTableMode
   @Input() mode: RentalTableMode = RentalTableMode.USER
   @Input() rentalData: Rental[] = []
@@ -36,6 +42,18 @@ export class RentalTableComponent {
     'price_overall',
     'actions'
   ]
+
+  dataSource!: MatTableDataSource<Rental>
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngOnInit() {
+    this.dataSource = new MatTableDataSource<Rental>(this.rentalData);
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   constructor(public dialog: MatDialog, private readonly router: Router) {}
 

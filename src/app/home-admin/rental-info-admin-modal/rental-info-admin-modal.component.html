@@ -74,7 +74,7 @@
           <span>Saldo: </span>
           <span>{{ user.wallet_balance + " zł" }}</span>
         </p>
-        <button mat-raised-button (click)="openDialog()">Nalicz karę</button>
+        <button mat-raised-button (click)="openDialog(user._id!)">Nalicz karę</button>
       </div>
     </div>
   </ng-container>
@@ -97,7 +97,10 @@
         <p>Pozostało 10 dni</p>
       </div>
       <div>
-        <p>Status: Oczekujące</p>
+        <p>
+          <span>Status: </span>
+          <span>{{ getRentalStatus(rental?.start_date!, rental?.end_date!, rental?.is_canceled!) }}</span>
+        </p>
         <p>
           <span>Cena: </span>
           <span>{{ rental.price_overall + " zł" }}</span>

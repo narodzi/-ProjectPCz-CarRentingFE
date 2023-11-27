@@ -8,6 +8,7 @@ import { RentalApi } from 'src/app/shared/api/rental.api';
 import { Observable } from 'rxjs';
 import { Car } from 'src/app/shared/models/car.model';
 import { Rental } from 'src/app/shared/models/rental.model';
+import { getRentalStatus } from 'src/app/shared/utils/date-time.adapter';
 
 @Component({
   selector: 'app-rental-info-modal',
@@ -17,7 +18,7 @@ import { Rental } from 'src/app/shared/models/rental.model';
   imports: [CommonModule, MaterialModule]
 })
 export class RentalInfoModalComponent {
-
+  getRentalStatus = getRentalStatus
   rentalId: string
 
   car$: Observable<Car>

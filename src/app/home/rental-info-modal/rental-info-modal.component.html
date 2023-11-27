@@ -56,19 +56,22 @@
         <p>
           <span>Data rozpoczęcia:</span>
           <span>
-            {{ rental.start_date | date : 'd/M/y h:mm' }}
+            {{ rental.start_date | date : 'dd.MM.y' }}
           </span>
         </p>
         <p>
           <span>Data zakończenia:</span>
           <span>
-            {{ rental.end_date | date : 'd/M/y h:mm' }}
+            {{ rental.end_date | date : 'dd.MM.y' }}
           </span>
         </p>
         <p>Pozostało 10 dni</p>
       </div>
       <div>
-        <p>Status: Oczekujące</p>
+        <p>
+          <span>Status: </span>
+          <span>{{ getRentalStatus(rental?.start_date!, rental?.end_date!, rental?.is_canceled!) }}</span>
+        </p>
         <p>
           <span>Cena: </span>
           <span>{{ rental.price_overall + ' zł' }}</span>
@@ -79,7 +82,7 @@
 </div>
 <div mat-dialog-actions align="end">
   <ng-container *ngIf="rental$ | async as rental">
-    <button *ngIf="!rental.is_canceled"  mat-button (click)="cancelRental()">Anuluj wypożyczenie</button>
+    <button *ngIf="getRentalStatus(rental?.start_date!, rental?.end_date!, rental?.is_canceled!) === 'Nadchodzące'"  mat-button (click)="cancelRental()">Anuluj wypożyczenie</button>
   </ng-container>
   <button mat-button (click)="closeModal()">Close</button>
 </div>

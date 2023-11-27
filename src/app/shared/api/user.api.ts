@@ -31,6 +31,10 @@ export class UserApi {
         return this.http.put<number>(`http://localhost:4300/users/${userId}`, user)
     }
 
+    subtractUserMoney(userId: string, amount: number) {
+        return this.http.put<number>(`http://localhost:4300/users/${userId}/subtractMoney?amount=${amount}`, {})
+    }
+
     // User role v
 
     getUserinfoAsUser() {
@@ -43,4 +47,12 @@ export class UserApi {
         return this.http.put<User>(`http://localhost:4300/users/${userId}/addMoney?amount=${amount}`, {})
     }
 
+    
+    // Auth - check if user account is activated = all data is filled
+
+    checkIfMongoExist() {
+        const userId = this.keycloakService.getUserId()
+        console.log(userId)
+        return this.http.get<string>(`http://localhost:4300/users/mongo_exist/${userId}`)
+    }
 }

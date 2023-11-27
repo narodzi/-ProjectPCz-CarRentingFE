@@ -5,7 +5,6 @@
     <button mat-flat-button color="primary" (click)="goToCarPage()">Samochody (AdminView)</button>
     <button mat-flat-button color="primary" (click)="goToUsersPage()">Użytkownicy (AdminView)</button>
     <button mat-flat-button color="primary" (click)="goToMaintenance()">Konserwacja (AdminView)</button>
-    <span class="log-out">Wyloguj</span>
-    <span class="balance">Saldo: 150,00 zł</span>
+    <button class="log-out" (click)="logOut()" mat-flat-button color="primary">Wyloguj</button>
 </mat-toolbar>
 <router-outlet></router-outlet>

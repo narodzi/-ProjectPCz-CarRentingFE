@@ -27,7 +27,9 @@ export class RentalApi {
     }
 
     addRental(rental: RentalRequest) {
-        return this.http.post<string>(`http://localhost:4300/rentals/`, rental)
+        const userId = this.keycloakService.getUserId()
+        const rentalWithUserId = {...rental, user_id: userId}
+        return this.http.post<string>(`http://localhost:4300/rentals/`, rentalWithUserId)
     }
 
 }

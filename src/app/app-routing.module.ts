@@ -8,16 +8,17 @@ import { UsersComponent } from './users/users.component';
 import { HomeAdminDashboardComponent } from './home-admin/dashboard/home-admin-dashboard.component';
 import { CarPageComponent } from './car/car-page/car-page.component';
 import { MaintenanceComponent } from './maintenance/maintenance.component';
+import { UserActivatedGuard } from './shared/guards/user-activated.guard';
 
 const routes: Routes = [
-  { path: 'home', component: HomeDashboardComponent },
-  { path: 'home_admin', component: HomeAdminDashboardComponent },
-  { path: 'car', component: CarDashboardComponent},
-  { path: 'car/form', component: CarFormComponent },
-  { path: 'car/:id', component: CarPageComponent },
+  { path: 'home', component: HomeDashboardComponent, canActivate: [UserActivatedGuard]},
+  { path: 'home_admin', component: HomeAdminDashboardComponent, canActivate: [UserActivatedGuard] },
+  { path: 'car', component: CarDashboardComponent, canActivate: [UserActivatedGuard]},
+  { path: 'car/form', component: CarFormComponent, canActivate: [UserActivatedGuard] },
+  { path: 'car/:id', component: CarPageComponent, canActivate: [UserActivatedGuard] },
   { path: 'user_account', component: UserAccountComponent },
-  { path: 'users', component: UsersComponent },
-  { path: 'maintenance', component: MaintenanceComponent},
+  { path: 'users', component: UsersComponent, canActivate: [UserActivatedGuard] },
+  { path: 'maintenance', component: MaintenanceComponent, canActivate: [UserActivatedGuard]},
   { path: '', pathMatch: 'full', redirectTo: '/home'}
 ];
 

@@ -33,6 +33,7 @@
     
     .search-panel {
         padding: 20px 0 20px 0;
+        background-color: white;
         border: solid black 1px;
         border-radius: 5px;
     }
@@ -73,4 +74,12 @@
         align-items: center;
         justify-content: center;
     }
+}
+
+.header-text {
+    margin: 0;
+    padding-top: 10px;
+    font-size: 28px;
+    font-weight: 600;
+    color: white;
 }

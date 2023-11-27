@@ -1,9 +1,7 @@
 <ng-container *ngIf="user$ | async as user">
   <div class="column-container">
+      <p class="header-text">Informacje o koncie</p>
       <mat-card class="card">
-          <mat-card-header>
-            <mat-card-title> Informacje o koncie </mat-card-title>
-          </mat-card-header>
           <mat-card-content>
             <p>
               <span>Nazwa użytkownika: </span>
@@ -31,7 +29,7 @@
             </p>
             <p>
               <span>Ulica i numer domu/mieszkania </span>
-              <span>{{ 'Ulica ' + user.house_number }}</span>
+              <span>{{ user.street + ' ' + user.house_number }}</span>
               <span *ngIf="user.apartment_number">{{ '/' + user.apartment_number }}</span>
             </p>
             <p>
@@ -44,14 +42,12 @@
             </p>
           </mat-card-content>
         </mat-card>
-        <mat-card class="card">
-          <mat-card-header>
-            <mat-card-title> Saldo </mat-card-title>
-          </mat-card-header>
+        <p class="header-text">Saldo</p>
+        <mat-card class="card second-card">
           <mat-card-content>
               <div class="row">
                 <p>{{ user.wallet_balance }}</p>
-                <button mat-raised-button (click)="openDialog()">ZASIL +</button>
+                <button mat-raised-button color="primary" (click)="openDialog()">ZASIL +</button>
               </div>
           </mat-card-content>
         </mat-card>

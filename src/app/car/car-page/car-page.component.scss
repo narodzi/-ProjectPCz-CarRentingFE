@@ -1,19 +1,24 @@
 .img {
   max-width: 500px;
   border: 1px solid black;
+  border-radius: 8px;
 }
 
 .property-row {
   display: flex;
   justify-content: space-between;
-  width: 50%;
+  width: 70%;
   font-size: 24px;
-  border: solid 1px black;
+  border-bottom: solid 1px black;
   padding: 8px;
+
+  .property {
+    font-weight: 600;
+  }
 }
 
 .paragraphs {
-  width: 120%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,4 +35,16 @@
   flex-direction: column;
   align-items: center;
   gap: 10px
+}
+
+.card {
+  max-width: fit-content;
+  margin-top: 30px;
+}
+
+.header-text {
+  padding-top: 10px;
+  font-size: 32px;
+  font-weight: 600;
+  color: white;
 }

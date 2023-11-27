@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserActivatedService } from './shared/auth/user-activated.service';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private readonly router: Router) {}
+  constructor(private readonly userActivatedService: UserActivatedService, private readonly router: Router) {}
 
   goToAdminHomePage() {
     this.router.navigate(['home_admin'])
@@ -31,5 +32,9 @@ export class AppComponent {
   
   goToMain() {
     this.router.navigate(['home'])
+  }
+
+  logOut() {
+    alert('logout')
   }
 }

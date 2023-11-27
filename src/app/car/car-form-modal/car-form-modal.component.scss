@@ -4,6 +4,12 @@
   gap: 8px;
 }
 
+.img {
+  max-width: 300px;
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
 .add-button {
   position: fixed;
   right: 4em;

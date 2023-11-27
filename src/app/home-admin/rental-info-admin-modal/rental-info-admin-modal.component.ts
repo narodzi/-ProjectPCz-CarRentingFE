@@ -10,8 +10,8 @@ import { CarApi } from 'src/app/shared/api/car.api';
 import { RentalApi } from 'src/app/shared/api/rental.api';
 import { UserApi } from 'src/app/shared/api/user.api';
 import { MaterialModule } from 'src/app/shared/modules/material.module';
-import { WalletBalanceModalComponent } from 'src/app/user-account/wallet-balance-modal/wallet-balance-modal.component';
 import { FineModalComponent } from '../fine-modal/fine-modal.component';
+import { getRentalStatus } from 'src/app/shared/utils/date-time.adapter';
 
 @Component({
   selector: 'app-rental-info-admin-modal',
@@ -25,7 +25,7 @@ import { FineModalComponent } from '../fine-modal/fine-modal.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RentalInfoAdminModalComponent { 
-
+  getRentalStatus = getRentalStatus
   car$: Observable<Car>
   rental$: Observable<Rental>
   user$: Observable<User>
@@ -47,7 +47,16 @@ export class RentalInfoAdminModalComponent {
     this.dialogRef.close();
   }
 
-  openDialog() {
-    this.dialog.open(FineModalComponent)
+  openDialog(userId: string) {
+    const finedDialogRef = this.dialog.open(FineModalComponent)
+
+    finedDialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.userApi.subtractUserMoney(userId, result).subscribe({
+        next: () => this.user$ = this.userApi.getUser(userId)
+        })
+      }
+    })
+    
   }
 }

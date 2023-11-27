@@ -9,7 +9,7 @@ import { FilteredApi } from 'src/app/shared/api/filtered.api';
 import { RentalApi } from 'src/app/shared/api/rental.api';
 import { CommonModule } from '@angular/common';
 import { Observable, map, tap } from 'rxjs';
-import { compareRentalByStartDate } from 'src/app/shared/utils/date-time.adapter';
+import { compareRentalByStartDate, getRentalStatus} from 'src/app/shared/utils/date-time.adapter';
 import { Car } from 'src/app/shared/models/car.model';
 import { CarApi } from 'src/app/shared/api/car.api';
 
@@ -21,6 +21,7 @@ import { CarApi } from 'src/app/shared/api/car.api';
   standalone: true
 })
 export class HomeDashboardComponent {
+  getRentalStatus = getRentalStatus
   HomeDashboardNav = HomeDashboardNav
   selectedIndex = 0
 
@@ -53,5 +54,29 @@ export class HomeDashboardComponent {
 
   changeTab(direction: HomeDashboardNav) {
     this.selectedIndex = direction
+    this.rentals$ = this.rentalApi.getRentalsForUser().pipe(map(rentals => rentals.sort(compareRentalByStartDate)), tap(rental => {
+      const carId = rental.at(0)?.car_id
+      if(carId) {
+        this.currentRentalCar$ = this.carApi.getCar(carId)
+      }
+    }))
+  }
+
+  getIcon(startDate: string, endDate: string, isCancelled: boolean) {
+    const result = getRentalStatus(startDate, endDate, isCancelled)
+
+    if(result === 'Anulowane') {
+      return 'assets/cancelled-icon.svg'
+    }
+    if(result === 'Nadchodzące') {
+      return 'assets/pending-icon.svg'
+    }
+    if(result === 'W trakcie') {
+      return 'assets/in-progress-icon.svg'
+    }
+    if(result === 'Zakończone') {
+      return 'assets/done-icon.svg'
+    }
+    return ''
   }
 }

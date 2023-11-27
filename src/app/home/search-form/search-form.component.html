@@ -7,14 +7,14 @@
         <mat-panel-description>
           <mat-form-field>
             <mat-label>Data rozpoczęcia</mat-label>
-            <input matInput [matDatepicker]="picker" [formControl]="searchForm.controls.startDate">
+            <input matInput [min]="today" [matDatepicker]="picker" [formControl]="searchForm.controls.startDate">
             <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Data zakończenia</mat-label>
-            <input matInput [matDatepicker]="picker2" [formControl]="searchForm.controls.endDate">
+            <input matInput [min]="today" [matDatepicker]="picker2" [formControl]="searchForm.controls.endDate">
             <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
             <mat-datepicker #picker2></mat-datepicker>
           </mat-form-field>

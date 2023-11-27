@@ -30,6 +30,7 @@ export type SearchFormModel = FormGroup<{
   imports: [CommonModule, MaterialModule, ReactiveFormsModule]
 })
 export class SearchFormComponent implements OnInit {
+  today = new Date()
 
   @Output() sendForm = new EventEmitter<RentalSearchRequest>()
 
