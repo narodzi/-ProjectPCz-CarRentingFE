@@ -8,19 +8,9 @@
     <p>Twoje konto nie jest jeszcze gotowe. Kliknij w przycisk poniżej, żeby uzupełnić niezbędne informacje.</p>
     <button *ngIf="!userActivated" mat-raised-button color="primary" (click)="openEditDialog()">Uzupełnij dane użytkownika</button>
   </mat-card-content>
-
+</mat-card>
 <ng-container *ngIf="user$ | async as user">
   <div class="column-container">
-    <mat-card *ngIf="!userActivated" class="warning-card">
-      <mat-card-header>
-        <mat-card-title>
-          Konto nieaktywne
-        </mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <p>Twoje konto nie jest jeszcze gotowe. Kliknij w przycisk poniżej, żeby uzupełnić niezbędne informacje.</p>
-      </mat-card-content>
-    </mat-card>
     <div class="header-bar">
       <p class="header-text">Informacje o koncie</p>
       <button *ngIf="!userActivated" mat-raised-button color="primary" (click)="openEditDialog()">Uzupełnij dane użytkownika</button>

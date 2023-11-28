@@ -54,5 +54,5 @@
       </mat-chip-listbox>
 </div>
 <div class="results-container">
-    <app-search-result-card *ngFor="let result of rentalSearchResults" [singleResult]="result" (sendChoosenCarId)="handleReservation($event)"></app-search-result-card>
+    <app-search-result-card class="shadow" *ngFor="let result of rentalSearchResults" [singleResult]="result" (sendChoosenCarId)="handleReservation($event)"></app-search-result-card>
 </div>

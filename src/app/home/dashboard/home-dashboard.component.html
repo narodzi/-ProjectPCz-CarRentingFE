@@ -5,7 +5,7 @@
         <div class="cards">
           <ng-container *ngIf="{rental: (rentals$ | async)?.at(0) , car: currentRentalCar$ | async } as currentRental">
             <p class="header-text">Witaj! Oto twoje ostatnie wypożyczenie:</p>
-            <mat-card class="last-rental-card">
+            <mat-card class="last-rental-card shadow ">
               <mat-card-content>
                 <div class="last-rental-card-content">
                   <img style="width: 250px; border: solid 1px black; border-radius: 5px;" [src]="currentRental.car?.image_url"/>
@@ -22,7 +22,7 @@
             </mat-card>
           </ng-container>
           <p class="header-text">Twoje wypożyczenia</p>
-          <mat-card class="card">
+          <mat-card class="card shadow">
             <mat-card-content>
               <ng-container *ngIf="rentals$ | async as rentals">
                 <app-rental-table [rentalData]="rentals"></app-rental-table>
@@ -31,7 +31,8 @@
           </mat-card>
         </div>
         <div class="search">
-          <app-search-form class="search-panel" (sendForm)="handleFormFilled($event)"></app-search-form>
+          <h2 class="logo">🚗CarRental🔥</h2>
+          <app-search-form class="search-panel shadow" (sendForm)="handleFormFilled($event)"></app-search-form>
         </div>
       </div>
     </mat-tab>
