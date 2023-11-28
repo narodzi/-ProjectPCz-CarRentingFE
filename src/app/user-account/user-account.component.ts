@@ -55,10 +55,9 @@ export class UserAccountComponent {
           ...resp,
           user_id: this.userId
         }
-        console.log(resp_with_userId)
-        // this.userApi.addUser(resp_with_userId).subscribe({
-        //   next: () => this.router.navigate(['/home'])
-        // })
+        this.userApi.addUser(resp_with_userId).subscribe({
+          next: () => this.router.navigate(['/home'])
+        })
       }
     })
   }
