@@ -18,11 +18,12 @@ import { KeycloakService } from '../shared/auth/keycloak.service';
 })
 export class UserAccountComponent {
 
-  userId = this.keycloakService.getUserId()
+  userId: string
   user$ = this.userApi.getUserinfoAsUser()
   userActivated: boolean = true
 
   constructor(public dialog: MatDialog, private readonly keycloakService: KeycloakService, private readonly userApi: UserApi, private readonly router: Router) {
+    this.userId = this.keycloakService.getUserId()
     this.userApi.checkIfMongoExist().subscribe({
       next: () => this.userActivated = true,
       error: () => this.userActivated = false
@@ -44,7 +45,7 @@ export class UserAccountComponent {
   openEditDialog() {
     const dialogRef = this.dialog.open(UserFormModalComponent, {
       data: {
-        mode: 'add'
+        mode: 'userInit'
       }
     })
 
@@ -54,9 +55,10 @@ export class UserAccountComponent {
           ...resp,
           user_id: this.userId
         }
-        this.userApi.addUser(resp_with_userId).subscribe({
-          next: () => this.router.navigate(['/home'])
-        })
+        console.log(resp_with_userId)
+        // this.userApi.addUser(resp_with_userId).subscribe({
+        //   next: () => this.router.navigate(['/home'])
+        // })
       }
     })
   }

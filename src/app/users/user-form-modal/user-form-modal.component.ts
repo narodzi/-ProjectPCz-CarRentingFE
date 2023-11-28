@@ -90,6 +90,9 @@ export class UserFormModalComponent {
   sendForm() {
     this.userForm.markAllAsTouched()
     if(this.userForm.valid) {
+      if(this.mode === 'userInit') {
+        this.dialogRef.close(this.convertFormToDto(this.userForm))
+      }
       if(this.mode === 'add') {
         this.userApi.addUser(this.convertFormToDto(this.userForm)).subscribe({
           next: () => this.dialogRef.close(true)
