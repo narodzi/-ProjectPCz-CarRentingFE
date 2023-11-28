@@ -2,21 +2,9 @@
 <div mat-dialog-content style="padding-top: 10px;">
     <div class="form">
         <mat-form-field>
-            <mat-label>Numer domu</mat-label>
-            <input matInput [formControl]="userForm.controls.house_number" required>
-            <mat-error *ngIf="userForm.controls.house_number.invalid">{{ "Pole obowiązkowe" }}</mat-error>
-        </mat-form-field>
-        
-        <mat-form-field>
-            <mat-label>Numer mieszkania</mat-label>
-            <input matInput [formControl]="userForm.controls.apartment_number" required>
-            <mat-error *ngIf="userForm.controls.apartment_number.invalid">{{ "Pole obowiązkowe" }}</mat-error>
-        </mat-form-field>
-
-        <mat-form-field>
-            <mat-label>Kod pocztowy</mat-label>
-            <input matInput [formControl]="userForm.controls.postal_code" required>
-            <mat-error *ngIf="userForm.controls.postal_code.invalid">{{ "Pole obowiązkowe" }}</mat-error>
+            <mat-label>Państwo</mat-label>
+            <input matInput [formControl]="userForm.controls.country" required>
+            <mat-error *ngIf="userForm.controls.country.invalid">{{ "Pole obowiązkowe" }}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
@@ -24,11 +12,28 @@
             <input matInput [formControl]="userForm.controls.city" required>
             <mat-error *ngIf="userForm.controls.city.invalid">{{ "Pole obowiązkowe" }}</mat-error>
         </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Ulica</mat-label>
+            <input matInput [formControl]="userForm.controls.street" required>
+            <mat-error *ngIf="userForm.controls.street.invalid">{{ "Pole obowiązkowe" }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Numer domu</mat-label>
+            <input matInput [formControl]="userForm.controls.house_number" required>
+            <mat-error *ngIf="userForm.controls.house_number.invalid">{{ "Pole obowiązkowe" }}</mat-error>
+        </mat-form-field>
         
         <mat-form-field>
-            <mat-label>Państwo</mat-label>
-            <input matInput [formControl]="userForm.controls.country" required>
-            <mat-error *ngIf="userForm.controls.country.invalid">{{ "Pole obowiązkowe" }}</mat-error>
+            <mat-label>Numer mieszkania</mat-label>
+            <input matInput [formControl]="userForm.controls.apartment_number">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Kod pocztowy</mat-label>
+            <input matInput [formControl]="userForm.controls.postal_code" required>
+            <mat-error *ngIf="userForm.controls.postal_code.invalid">{{ "Pole obowiązkowe" }}</mat-error>
         </mat-form-field>
 
         <mat-form-field>
@@ -41,6 +46,12 @@
             <mat-label>Saldo</mat-label>
             <input matInput [formControl]="userForm.controls.wallet_balance" required>
             <mat-error *ngIf="userForm.controls.wallet_balance.invalid">{{ "Pole obowiązkowe" }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Numer telefonu</mat-label>
+            <input matInput [formControl]="userForm.controls.phone_number" required>
+            <mat-error *ngIf="userForm.controls.phone_number.invalid">{{ "Pole obowiązkowe" }}</mat-error>
         </mat-form-field>
     </div>
 </div>

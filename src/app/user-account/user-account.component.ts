@@ -39,7 +39,7 @@ export class UserAccountComponent {
     })
   }
 
-  openEditDialog(user: User) {
+  openEditDialog() {
     const dialogRef = this.dialog.open(UserFormModalComponent, {
       data: {
         mode: 'add'

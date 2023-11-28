@@ -12,6 +12,7 @@ export type UserFormModel = FormGroup<{
   wallet_balance: FormControl<number | null>;
   country: FormControl<string | null>;
   city: FormControl<string | null>;
+  street: FormControl<string | null>;
   postal_code: FormControl<string | null>;
   house_number: FormControl<string | null>;
   apartment_number: FormControl<string | null>;
@@ -39,9 +40,10 @@ export class UserFormModalComponent {
     wallet_balance: new FormControl<number | null>(null, Validators.required),
     country: new FormControl<string | null>(null, Validators.required),
     city: new FormControl<string | null>(null, Validators.required),
+    street: new FormControl<string | null>(null, Validators.required),
     postal_code: new FormControl<string | null>(null, Validators.required),
     house_number: new FormControl<string | null>(null, Validators.required),
-    apartment_number: new FormControl<string | null>(null, Validators.required),
+    apartment_number: new FormControl<string | null>(null),
     phone_number: new FormControl<string | null>(null, Validators.required),
   });
 
@@ -53,7 +55,9 @@ export class UserFormModalComponent {
   ) {
     if(data) {
       if(data.user) {
+        console.log('hello3')
         if(data.user._id) {
+          console.log('hello4')
           this.userId = data.user._id
         }
         this.userForm.patchValue(data.user)
@@ -75,6 +79,7 @@ export class UserFormModalComponent {
       wallet_balance: this.userForm.controls.wallet_balance.value,
       country: this.userForm.controls.country.value,
       city: this.userForm.controls.city.value,
+      street: this.userForm.controls.street.value,
       postal_code: this.userForm.controls.postal_code.value,
       house_number: this.userForm.controls.house_number.value,
       apartment_number: this.userForm.controls.apartment_number.value,
