@@ -196,7 +196,7 @@ export class KeycloakService {
 
   isUserHaveAdminRole() {
     const userRoles: string[] = KeycloakService.keycloakAuthObject.tokenParsed.realm_access.roles
-    if(userRoles.some(role => role === 'ADMIN')) {
+    if(userRoles.some(role => role === 'employee')) {
       return true
     }
     return false
@@ -204,7 +204,7 @@ export class KeycloakService {
 
   isUserHaveUserRole() {
     const userRoles: string[] = KeycloakService.keycloakAuthObject.tokenParsed.realm_access.roles
-    if(userRoles.some(role => role === 'USER')) {
+    if(userRoles.some(role => role === 'user')) {
       return true
     }
     return false
