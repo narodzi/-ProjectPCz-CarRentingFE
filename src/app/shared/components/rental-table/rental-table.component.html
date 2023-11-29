@@ -1,4 +1,4 @@
-<ng-container *ngIf="rentalData.length">
+<ng-container *ngIf="rentalData.length; else empty">
   <table [ngClass]="mode === RentalTableMode.USER ? 'user-table' : 'admin-table'" mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="car_id">
           <th mat-header-cell *matHeaderCellDef> Id samochodu </th>
@@ -46,3 +46,7 @@
     showFirstLastButtons>
 </mat-paginator>
 </ng-container>
+
+<ng-template #empty>
+  <app-no-data></app-no-data>
+</ng-template>

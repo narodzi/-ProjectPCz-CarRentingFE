@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { KeycloakService } from './shared/auth/keycloak.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';

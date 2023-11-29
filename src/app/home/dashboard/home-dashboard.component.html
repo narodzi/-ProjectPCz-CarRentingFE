@@ -6,25 +6,27 @@
           <ng-container *ngIf="{rental: (rentals$ | async)?.at(0) , car: currentRentalCar$ | async } as currentRental">
             <p class="header-text">Witaj! Oto twoje ostatnie wypożyczenie:</p>
             <mat-card class="last-rental-card shadow ">
-              <mat-card-content>
-                <div class="last-rental-card-content">
-                  <img style="width: 250px; border: solid 1px black; border-radius: 5px;" [src]="currentRental.car?.image_url"/>
-                  <div class="info">
-                    <p class="car-header">{{ currentRental.car?.brand + ' ' + currentRental.car?.model }}</p>
-                    <p class="rental-date">{{ (currentRental.rental?.start_date | date : 'dd.MM.y') + ' - ' + (currentRental.rental?.end_date | date : 'dd.MM.y') }}</p>
+              <ng-container *ngIf="currentRental.car; else empty">
+                <mat-card-content>
+                  <div class="last-rental-card-content">
+                    <img style="width: 250px; border: solid 1px black; border-radius: 5px;" [src]="currentRental.car.image_url"/>
+                    <div class="info">
+                      <p class="car-header">{{ currentRental.car.brand + ' ' + currentRental.car.model }}</p>
+                      <p class="rental-date">{{ (currentRental.rental?.start_date | date : 'dd.MM.y') + ' - ' + (currentRental.rental?.end_date | date : 'dd.MM.y') }}</p>
+                    </div>
+                      <div class="status">
+                        <img style="width: 75px; margin-bottom: 5px;" [src]="getIcon(currentRental.rental?.start_date!, currentRental.rental?.end_date!, currentRental.rental?.is_canceled!)"/>
+                        <p style="font-weight: bold;">{{ getRentalStatus(currentRental.rental?.start_date!, currentRental.rental?.end_date!, currentRental.rental?.is_canceled!)}}</p>
+                    </div>
                   </div>
-                    <div class="status">
-                      <img style="width: 75px; margin-bottom: 5px;" [src]="getIcon(currentRental.rental?.start_date!, currentRental.rental?.end_date!, currentRental.rental?.is_canceled!)"/>
-                      <p style="font-weight: bold;">{{ getRentalStatus(currentRental.rental?.start_date!, currentRental.rental?.end_date!, currentRental.rental?.is_canceled!)}}</p>
-                  </div>
-                </div>
-                </mat-card-content>
+                  </mat-card-content>
+              </ng-container>
             </mat-card>
           </ng-container>
           <p class="header-text">Twoje wypożyczenia</p>
           <mat-card class="card shadow">
             <mat-card-content>
-              <ng-container *ngIf="rentals$ | async as rentals">
+              <ng-container *ngIf="rentals$ | async as rentals; else empty">
                 <app-rental-table [rentalData]="rentals"></app-rental-table>
               </ng-container>
             </mat-card-content>
@@ -42,3 +44,7 @@
   </mat-tab-group>
 
 </div>
+
+<ng-template #empty>
+  <app-no-data></app-no-data>
+</ng-template>

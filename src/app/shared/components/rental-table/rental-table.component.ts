@@ -11,13 +11,14 @@ import { getRentalStatus } from '../../utils/date-time.adapter';
 import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MyCustomPaginatorIntl } from '../../utils/paginator-translate.service';
+import { NoDataComponent } from '../no-data/no-data.component';
 
 @Component({
   selector: 'app-rental-table',
   templateUrl: './rental-table.component.html',
   styleUrls: ['./rental-table.component.scss'],
   standalone: true,
-  imports: [CommonModule, MaterialModule, MatPaginatorModule, MatTableModule],
+  imports: [CommonModule, MaterialModule, MatPaginatorModule, MatTableModule, NoDataComponent],
   providers: [{provide: MatPaginatorIntl, useClass: MyCustomPaginatorIntl}]
 })
 export class RentalTableComponent implements OnInit, AfterViewInit {

@@ -12,12 +12,13 @@ import { Observable, map, tap } from 'rxjs';
 import { compareRentalByStartDate, getRentalStatus} from 'src/app/shared/utils/date-time.adapter';
 import { Car } from 'src/app/shared/models/car.model';
 import { CarApi } from 'src/app/shared/api/car.api';
+import { NoDataComponent } from 'src/app/shared/components/no-data/no-data.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home-dashboard.component.html',
   styleUrls: ['./home-dashboard.component.scss'],
-  imports: [CommonModule, MaterialModule, RentalTableComponent, SearchFormComponent, SearchResultsComponent],
+  imports: [CommonModule, MaterialModule, RentalTableComponent, SearchFormComponent, SearchResultsComponent, NoDataComponent],
   standalone: true
 })
 export class HomeDashboardComponent {

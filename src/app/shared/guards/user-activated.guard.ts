@@ -5,7 +5,7 @@ import {
   Router,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
 import { UserApi } from '../api/user.api';
 
 
@@ -19,10 +19,12 @@ export class UserActivatedGuard {
     state: RouterStateSnapshot
   ): Observable<boolean> | Promise<boolean> | UrlTree | boolean {
 
-    if(this.userApi.isUserExist === false) {
-        return this.router.navigate(['user_account'])
-    } else {
-      return true;
-    }
+    return this.userApi.checkIfMongoExist().pipe(map(resp => {
+      if(resp === true) {
+        return true
+      }
+      this.router.navigate(['user_account'])
+      return false
+    }))
   }
 }

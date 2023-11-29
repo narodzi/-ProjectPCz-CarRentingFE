@@ -34,5 +34,5 @@ export function getRentalStatus(startDate: string, endDate: string, isCancelled:
     return 'Zakończone'
   }
 
-  throw new Error('Cant calculate rental status')
+  return '-'
 }

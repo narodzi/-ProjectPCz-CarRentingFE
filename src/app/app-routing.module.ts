@@ -11,15 +11,15 @@ import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { UserActivatedGuard } from './shared/guards/user-activated.guard';
 
 const routes: Routes = [
-  { path: 'home', component: HomeDashboardComponent, canActivate: [UserActivatedGuard]},
-  { path: 'home_admin', component: HomeAdminDashboardComponent, canActivate: [UserActivatedGuard] },
-  { path: 'car', component: CarDashboardComponent, canActivate: [UserActivatedGuard]},
-  { path: 'car/form', component: CarFormComponent, canActivate: [UserActivatedGuard] },
-  { path: 'car/:id', component: CarPageComponent, canActivate: [UserActivatedGuard] },
   { path: 'user_account', component: UserAccountComponent },
-  { path: 'users', component: UsersComponent, canActivate: [UserActivatedGuard] },
-  { path: 'maintenance', component: MaintenanceComponent, canActivate: [UserActivatedGuard]},
-  { path: '', pathMatch: 'full', redirectTo: '/home'}
+  { path: 'home', canActivate: [UserActivatedGuard], component: HomeDashboardComponent,},
+  { path: 'home_admin', canActivate: [UserActivatedGuard], component: HomeAdminDashboardComponent},
+  { path: 'car', canActivate: [UserActivatedGuard], component: CarDashboardComponent},
+  { path: 'car/form', canActivate: [UserActivatedGuard], component: CarFormComponent},
+  { path: 'car/:id', canActivate: [UserActivatedGuard], component: CarPageComponent},
+  { path: 'users', canActivate: [UserActivatedGuard] , component: UsersComponent},
+  { path: 'maintenance', canActivate: [UserActivatedGuard], component: MaintenanceComponent},
+  { path: '**', pathMatch: 'full', redirectTo: '/home'}
 ];
 
 @NgModule({

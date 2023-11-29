@@ -2,22 +2,13 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { User } from "../models/user.model";
 import { KeycloakService } from "../auth/keycloak.service";
+import { of, switchMap } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserApi {
-    isUserExist!: boolean
-    constructor(private readonly http: HttpClient, private readonly keycloakService: KeycloakService) {
-        this.checkIfMongoExist().subscribe({
-            next: () => this.isUserExist = true,
-            error: () => this.isUserExist = false
-        })
-    }
-
-    get UserExistInMongo() {
-        return this.isUserExist
-    }
+    constructor(private readonly http: HttpClient, private readonly keycloakService: KeycloakService) {}
     // Admin role v
 
     getUsers() {
@@ -61,6 +52,16 @@ export class UserApi {
 
     checkIfMongoExist() {
         const userId = this.keycloakService.getUserId()
-        return this.http.get<string>(`http://localhost:4300/users/mongo_exist/${userId}`)
+        console.log(userId)
+        return this.http.get(`http://localhost:4300/users/mongo_exist/${userId}`, {observe: 'response'}).pipe(switchMap(resp => {
+            console.log(resp)
+            if(resp.status === 200) {
+                return of(true)
+            }
+            if(resp.status === 204) {
+                return of(false)
+            }
+            return of(false)
+        }))
     }
 }
