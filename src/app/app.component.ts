@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { KeycloakService } from './shared/auth/keycloak.service';
-import { UserApi } from './shared/api/user.api';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +8,11 @@ import { UserApi } from './shared/api/user.api';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private readonly router: Router, private readonly userApi: UserApi) {}
+
+  userAdmin: boolean = false
+  constructor(private readonly router: Router, private readonly keycloakService: KeycloakService) {
+    this.userAdmin = this.keycloakService.isUserHaveAdminRole()
+  }
 
   goToAdminHomePage() {
     this.router.navigate(['home_admin'])

@@ -1,10 +1,10 @@
 <mat-toolbar class="toolbar" color="primary">
-    <span class="logo" (click)="goToMain()">Car Rental</span>
-    <button mat-flat-button color="primary" (click)="goToUserAccount()">Konto (UserView)</button>
-    <button mat-flat-button color="primary" (click)="goToAdminHomePage()">Home (AdminView)</button>
-    <button mat-flat-button color="primary" (click)="goToCarPage()">Samochody (AdminView)</button>
-    <button mat-flat-button color="primary" (click)="goToUsersPage()">Użytkownicy (AdminView)</button>
-    <button mat-flat-button color="primary" (click)="goToMaintenance()">Konserwacja (AdminView)</button>
+    <span *ngIf="!userAdmin" class="logo" (click)="goToMain()">Car Rental</span>
+    <span *ngIf="userAdmin" class="logo" (click)="goToAdminHomePage()">Car Rental</span>
+    <button *ngIf="!userAdmin" mat-flat-button color="primary" (click)="goToUserAccount()">Konto</button>
+    <button *ngIf="userAdmin" mat-flat-button color="primary" (click)="goToCarPage()">Samochody</button>
+    <button *ngIf="userAdmin" mat-flat-button color="primary" (click)="goToUsersPage()">Użytkownicy</button>
+    <button *ngIf="userAdmin" mat-flat-button color="primary" (click)="goToMaintenance()">Konserwacja</button>
     <button class="log-out" (click)="logOut()" mat-flat-button color="primary">Wyloguj</button>
 </mat-toolbar>
 <router-outlet></router-outlet>
