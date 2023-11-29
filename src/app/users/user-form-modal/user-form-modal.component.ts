@@ -82,7 +82,7 @@ export class UserFormModalComponent {
       street: this.userForm.controls.street.value,
       postal_code: this.userForm.controls.postal_code.value,
       house_number: this.userForm.controls.house_number.value,
-      apartment_number: this.userForm.controls.apartment_number.value,
+      apartment_number: this.userForm.controls.apartment_number.value ?? undefined,
       phone_number: this.userForm.controls.phone_number.value
     }
   }

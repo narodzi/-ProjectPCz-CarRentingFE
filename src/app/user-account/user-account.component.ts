@@ -5,8 +5,7 @@ import { UserApi } from '../shared/api/user.api';
 import { WalletBalanceModalComponent } from './wallet-balance-modal/wallet-balance-modal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UserFormModalComponent } from '../users/user-form-modal/user-form-modal.component';
-import { User } from '../shared/models/user.model';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { KeycloakService } from '../shared/auth/keycloak.service';
 
 @Component({
@@ -24,14 +23,12 @@ export class UserAccountComponent {
 
   constructor(public dialog: MatDialog, private readonly keycloakService: KeycloakService, private readonly userApi: UserApi, private readonly router: Router) {
       this.userApi.checkIfMongoExist().subscribe(resp => {
-        if(resp) {
-          this.userId = this.keycloakService.getUserId()
-        }
-        else {
+        if(!resp) {
           this.userActivated = false
         }
       })
-  }
+      this.userId = this.keycloakService.getUserId()
+    }
 
   openDialog() {
     const dialogRef = this.dialog.open(WalletBalanceModalComponent);
