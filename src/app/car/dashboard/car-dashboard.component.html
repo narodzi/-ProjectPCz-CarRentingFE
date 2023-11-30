@@ -1,11 +1,11 @@
 <div class="column-container">
     <div class="header-bar">
-      <p class="header-text">{{ "Samochody"}}</p>
+      <p class="header-text">{{ "Samochody" }}</p>
       <button mat-raised-button color="primary" (click)="openDialog()">Dodaj samochód</button>
     </div>
 
       <ng-container *ngIf="cars$ | async as cars">
-        <mat-card>
+        <mat-card class="shadow">
           <mat-card-content>
             <mat-tab-group  class="tabs">
                 <mat-tab label="Wszystkie">

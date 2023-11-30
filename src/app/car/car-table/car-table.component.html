@@ -1,5 +1,11 @@
 <ng-container *ngIf="carData">
     <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="image_url">
+          <th mat-header-cell *matHeaderCellDef> Zdjęcie </th>
+          <td mat-cell *matCellDef="let element">
+              <img src={{element.image_url}}/>
+          </td>
+        </ng-container>
         <ng-container matColumnDef="type">
             <th mat-header-cell *matHeaderCellDef> Typ </th>
             <td mat-cell *matCellDef="let element"> {{element.type}} </td>
@@ -55,5 +61,5 @@
 </ng-container>
 
 <ng-template #empty>
-    Ni ma aut
+    Nie ma aut
 </ng-template>

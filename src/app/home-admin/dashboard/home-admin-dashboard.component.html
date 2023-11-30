@@ -1,6 +1,6 @@
 <div class="container">
     <div class="column">
-        <mat-card>
+        <mat-card class="shadow">
             <mat-card-header>
               <mat-card-title> CarRental sp z.o.o - panel</mat-card-title>
             </mat-card-header>
@@ -17,7 +17,7 @@
             </mat-card-content>
           </mat-card>
     </div>
-    <div class="column">
+    <div class="column shadow">
       <ng-container *ngIf="rentals$ | async as rentals">
         <app-rental-table [mode]="RentalTableMode.ADMIN" [rentalData]="rentals" (changed)="handleRentalChanged($event)"></app-rental-table>
       </ng-container>

@@ -5,3 +5,11 @@
 [mat-header-cell] {
     text-align: center;
 }
+
+img {
+    margin-top: 5px;
+    width: 200px; 
+    height: 130px; 
+    object-fit: cover;
+    border-radius: 10px;
+}

@@ -27,7 +27,7 @@ export type CarTableOutput = {
   providers: [{provide: MatPaginatorIntl, useClass: MyCustomPaginatorIntl}]
 })
 export class CarTableComponent implements OnInit, AfterViewInit {
-  displayedColumns = ['type', 'brand', 'model', 'fuel_type', 'gearbox', 'production_year', 'price', 'actions']
+  displayedColumns = ['image_url', 'type', 'brand', 'model', 'fuel_type', 'gearbox', 'production_year', 'price', 'actions']
   
   @Input() carData: CarWithStatus[] | undefined = []
   @Output() sendTableResponse= new EventEmitter<CarTableOutput>()

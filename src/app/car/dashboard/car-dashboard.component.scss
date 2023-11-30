@@ -12,11 +12,15 @@
     padding-top: 10px;
     font-size: 32px;
     font-weight: 600;
-    color: white;
+    color: rgb(0, 55, 85);
 }
 
 .header-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.shadow {
+    box-shadow: 0px 10px 100px #cccccc;
 }

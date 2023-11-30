@@ -1,7 +1,7 @@
-<div>
-  <mat-tab-group style="width: 100%;" [selectedIndex]="selectedIndex">
+<div style="width: 100%; height: 100%;">
+  <mat-tab-group style="width: 100%; height: 100%;" [selectedIndex]="selectedIndex">
     <mat-tab>
-      <div class="container">
+      <div class="container" style="margin-bottom: 20px;">
         <div class="cards">
           <ng-container *ngIf="{rental: (rentals$ | async)?.at(0) , car: currentRentalCar$ | async } as currentRental">
             <p class="header-text">Witaj! Oto twoje ostatnie wypożyczenie:</p>
@@ -9,7 +9,7 @@
               <ng-container *ngIf="currentRental.car; else empty">
                 <mat-card-content>
                   <div class="last-rental-card-content">
-                    <img style="width: 250px; border: solid 1px black; border-radius: 5px;" [src]="currentRental.car.image_url"/>
+                    <img style="width: 250px; border-radius: 5px;" [src]="currentRental.car.image_url"/>
                     <div class="info">
                       <p class="car-header">{{ currentRental.car.brand + ' ' + currentRental.car.model }}</p>
                       <p class="rental-date">{{ (currentRental.rental?.start_date | date : 'dd.MM.y') + ' - ' + (currentRental.rental?.end_date | date : 'dd.MM.y') }}</p>
@@ -33,7 +33,7 @@
           </mat-card>
         </div>
         <div class="search">
-          <h2 class="logo">🚗CarRental🔥</h2>
+          <h2 class="logo">Car Rental</h2>
           <app-search-form class="search-panel shadow" (sendForm)="handleFormFilled($event)"></app-search-form>
         </div>
       </div>

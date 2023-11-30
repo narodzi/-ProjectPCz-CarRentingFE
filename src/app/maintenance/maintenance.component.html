@@ -1,7 +1,7 @@
 <div class="column-container">
     <p class="header-text">{{ "Konserwacje" }}</p>
     <ng-container *ngIf="maintenances$ | async as maintenances">
-        <mat-card>
+        <mat-card class = "shadow">
             <mat-card-content>
                 <app-maintenance-table (maintananceChanged)="handleMaintananceChanged($event)" (sendDeleteReq)="handleMaintananceDeleted($event)" class="table" [maintenancesData]="maintenances"></app-maintenance-table>
             </mat-card-content>

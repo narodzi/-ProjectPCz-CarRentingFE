@@ -1,18 +1,19 @@
 .back-button {
     width: 10%;
-    color: white;
+    color: rgb(0, 55, 85);
 }
 
 .header-bold-text {
     font-weight: bold;
-    color: white;
+    color: rgb(0, 55, 85);
 }
 
 .header {
     margin-right: 5%;
     margin-left: 5%;
     display: flex;
-    gap: 12px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     align-items: center;
     margin-bottom: 20px;
 }

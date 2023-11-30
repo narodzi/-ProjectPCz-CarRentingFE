@@ -2,7 +2,7 @@
     <ng-container *ngIf="car$ | async as car">
         <div class="column-container">
             <p class="header-text">Samochód</p>
-                <mat-card class="card">
+                <mat-card class="card shadow">
                     <mat-card-content class="card-content">
                         <img class="img" [src]="car.image_url">
                         <div class="buttons">
@@ -12,7 +12,7 @@
                         </div>
                     </mat-card-content>
                 </mat-card>
-            <mat-card class="card">
+            <mat-card class="card shadow">
                 <mat-card-content class="card-content">
                     <div class="paragraphs">
                         <p class="property-row">
