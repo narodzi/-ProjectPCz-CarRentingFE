@@ -5,17 +5,18 @@
               <mat-card-title> CarRental sp z.o.o - panel</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              statystyki
             </mat-card-content>
           </mat-card>
-        <mat-card>
+        <!-- <mat-card>
+            <ng-container *ngIf="statistics$ | async as statistics">
             <mat-card-header>
               <mat-card-title> Przychody firmy</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              statystyki
+              {{ statistics.income }}
             </mat-card-content>
-          </mat-card>
+          </ng-container>
+        </mat-card> -->
     </div>
     <div class="column shadow">
       <ng-container *ngIf="rentals$ | async as rentals">

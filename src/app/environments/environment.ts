@@ -4,7 +4,6 @@ export const environment = {
   baseHref: "",
   defaultLang: "en",
   supportedLang: ["en", "pl"],
-  authDebug: true,
   brand: {
     name: "renting",
     logoImage: "logo-main.svg",
@@ -33,7 +32,6 @@ export const environment = {
     authRequired: true,
     authHttp: true,
     tokenValidUntilTime: 60,
-    tokenAutoRefresh: true,
   },
 };
 

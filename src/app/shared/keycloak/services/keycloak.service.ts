@@ -6,7 +6,7 @@ import { tokenResult } from '../keycloakAuthrization';
 declare let Keycloak: any;
 @Injectable()
 export class KeycloakService {
-  static keycloakAuthObject: any;
+  static auth: any;
   static token?: BehaviorSubject<string | null>;
 
   constructor() {
@@ -14,62 +14,38 @@ export class KeycloakService {
   }
 
   static init(): Promise<any> {
-    KeycloakService.keycloakAuthObject = new Keycloak(environment.keyCloakConstructParams);
-    KeycloakService.keycloakAuthObject.onTokenExpired = () => {
-      if (environment.authConfig.tokenAutoRefresh) {
-        KeycloakService.getTokenSt()
-          .then(() => {
-          }, (_) => {
-          });
-      }
+    KeycloakService.auth = new Keycloak(environment.keyCloakConstructParams);
+    KeycloakService.auth.onTokenExpired = () => {
+      KeycloakService.getTokenSt()
     };
 
-    KeycloakService.keycloakAuthObject.onAuthRefreshSuccess = () => {
-    };
-
-    KeycloakService.keycloakAuthObject.onAuthRefreshError = () => {
+    KeycloakService.auth.onAuthRefreshError = () => {
       setInterval(() => {
         KeycloakService.logout();
       }, 20000);
     };
 
-    return new Promise((resolve, reject) => {
-      KeycloakService.keycloakAuthObject.init(environment.keyCloakInitParams)
+    return new Promise((resolve, _) => {
+      KeycloakService.auth.init(environment.keyCloakInitParams)
         .then(() => {
-          if (environment.authDebug) {
-          }
-          resolve(KeycloakService.keycloakAuthObject);
+          resolve(KeycloakService.auth);
         })
-        .catch(() => {
-          reject();
-        });
     });
   }
 
   static logout(url: string = environment.keyCloakConstructParams.logoutUrl) {
-    KeycloakService.keycloakAuthObject.logout(url);
-  }
-
-  static getUsername(): string {
-    return KeycloakService.keycloakAuthObject.tokenParsed.preferred_username;
-  }
-
-  static isAuthenticated(): boolean {
-    return KeycloakService.keycloakAuthObject.authenticated;
+    KeycloakService.auth.logout(url);
   }
 
   static getTokenSt(): Promise<tokenResult> {
-    return new Promise((resolve, reject) => {
-      if (KeycloakService.keycloakAuthObject && KeycloakService.keycloakAuthObject.token) {
-        KeycloakService.keycloakAuthObject
+    return new Promise((resolve, _) => {
+      if (KeycloakService.auth && KeycloakService.auth.token) {
+        KeycloakService.auth
           .updateToken(environment.authConfig.tokenValidUntilTime)
-          .then((refreshed: any) => {
-            if (environment.authDebug) {
-              console.log('Token refreshed: ', refreshed);
-            }
-            KeycloakService.token?.next(KeycloakService.keycloakAuthObject.token);
+          .then(() => {
+            KeycloakService.token?.next(KeycloakService.auth.token);
             resolve({
-              token: KeycloakService.keycloakAuthObject.token,
+              token: KeycloakService.auth.token,
               success: true
             }
             );
@@ -92,31 +68,25 @@ export class KeycloakService {
   }
 
   login(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      KeycloakService.keycloakAuthObject.login()
+    return new Promise((resolve, _) => {
+      KeycloakService.auth.login()
         .then((l: any) => {
-          console.log('l', l)
-          if (environment.authDebug) {
-          }
-          KeycloakService.keycloakAuthObject = environment.keyCloakConstructParams.logoutUrl;
-          resolve(KeycloakService.keycloakAuthObject);
+          KeycloakService.auth = environment.keyCloakConstructParams.logoutUrl;
+          resolve(KeycloakService.auth);
         })
-        .catch(() => {
-          reject();
-        });
     });
   }
 
   getToken(): Promise<tokenResult> {
-    return new Promise((resolve, reject) => {
-      if (KeycloakService.keycloakAuthObject && KeycloakService.keycloakAuthObject.token) {
-        KeycloakService.keycloakAuthObject
+    return new Promise((resolve, _) => {
+      if (KeycloakService.auth && KeycloakService.auth.token) {
+        KeycloakService.auth
           .updateToken(environment.authConfig.tokenValidUntilTime)
           .then(() => {
 
-            KeycloakService.token?.next(KeycloakService.keycloakAuthObject.token);
+            KeycloakService.token?.next(KeycloakService.auth.token);
             resolve({
-              token: KeycloakService.keycloakAuthObject.token,
+              token: KeycloakService.auth.token,
               success: true
             }
             );
@@ -139,19 +109,15 @@ export class KeycloakService {
   }
 
   clearToken() {
-    KeycloakService.keycloakAuthObject.clearToken();
-  }
-
-  getTokenSubject() {
-    return KeycloakService.token;
+    KeycloakService.auth.clearToken();
   }
 
   getUserId() {
-    return KeycloakService.keycloakAuthObject.tokenParsed.sub
+    return KeycloakService.auth.tokenParsed.sub
   }
 
   isUserHaveAdminRole() {
-    const userRoles: string[] = KeycloakService.keycloakAuthObject.tokenParsed.realm_access.roles
+    const userRoles: string[] = KeycloakService.auth.tokenParsed.realm_access.roles
     if(userRoles.some(role => role === 'employee')) {
       return true
     }
@@ -159,7 +125,7 @@ export class KeycloakService {
   }
 
   isUserHaveUserRole() {
-    const userRoles: string[] = KeycloakService.keycloakAuthObject.tokenParsed.realm_access.roles
+    const userRoles: string[] = KeycloakService.auth.tokenParsed.realm_access.roles
     if(userRoles.some(role => role === 'user')) {
       return true
     }

@@ -4,6 +4,7 @@ import { MaterialModule } from '../../shared/modules/material.module';
 import { RentalTableComponent } from 'src/app/shared/components/rental-table/rental-table.component';
 import { RentalTableMode } from 'src/app/shared/components/rental-table/rental-table.model';
 import { RentalApi } from 'src/app/shared/api/rental.api';
+import { StatisticsApi } from 'src/app/shared/api/statistics.api';
 
 @Component({
   selector: 'app-home-admin',
@@ -16,8 +17,10 @@ export class HomeAdminDashboardComponent {
   RentalTableMode = RentalTableMode
   
   rentals$ = this.rentalApi.getAllRentals()
+  statistics$ = this.statisticsApi.getIncome()
 
-  constructor(private readonly rentalApi: RentalApi) {}
+  constructor(private readonly rentalApi: RentalApi, 
+    private readonly statisticsApi: StatisticsApi) {}
 
   handleRentalChanged(changed: boolean) {
     if(changed) {
