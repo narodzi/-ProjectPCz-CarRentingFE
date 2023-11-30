@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { KeycloakService } from './shared/auth/keycloak.service';
+import { KeycloakService } from './shared/keycloak/services/keycloak.service';
 
 @Component({
   selector: 'app-root',

@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from 'src/app/environments/environment';
-import { KeyCloakTokenResult } from '../types/authTypes';
+import { Injectable } from '@angular/core';
+import { tokenResult } from '../keycloakAuthrization';
 
 declare let Keycloak: any;
-
 @Injectable()
 export class KeycloakService {
   static keycloakAuthObject: any;
@@ -17,39 +16,31 @@ export class KeycloakService {
   static init(): Promise<any> {
     KeycloakService.keycloakAuthObject = new Keycloak(environment.keyCloakConstructParams);
     KeycloakService.keycloakAuthObject.onTokenExpired = () => {
-      console.warn('[Auth-service] Auth token expired');
       if (environment.authConfig.tokenAutoRefresh) {
         KeycloakService.getTokenSt()
           .then(() => {
-            if (environment.authDebug) { console.log('Updated token via auto-refresh'); }
-          }, (reason) => {
-            if (environment.authDebug) { console.log('Failed token via auto-refresh: ', reason); }
+          }, (_) => {
           });
       }
     };
 
     KeycloakService.keycloakAuthObject.onAuthRefreshSuccess = () => {
-      if (environment.authDebug) { console.warn('[Auth-service] Token refreshed'); }
     };
 
     KeycloakService.keycloakAuthObject.onAuthRefreshError = () => {
-      if (environment.authDebug) { console.warn('[Auth-service] Auth token refresh error'); }
       setInterval(() => {
         KeycloakService.logout();
-      }, 15000);
+      }, 20000);
     };
 
     return new Promise((resolve, reject) => {
       KeycloakService.keycloakAuthObject.init(environment.keyCloakInitParams)
         .then(() => {
           if (environment.authDebug) {
-            console.log('Auth granted via KeyCloak service');
-            console.log(KeycloakService.keycloakAuthObject);
           }
           resolve(KeycloakService.keycloakAuthObject);
         })
         .catch(() => {
-          console.error('Auth rejected');
           reject();
         });
     });
@@ -63,43 +54,11 @@ export class KeycloakService {
     return KeycloakService.keycloakAuthObject.tokenParsed.preferred_username;
   }
 
-  // static getRole(): string {
-  //   if (KeycloakService.keycloakAuthObject) {
-  //     const roles: string[] = (<string[]>KeycloakService.keycloakAuthObject.tokenParsed.realm_access.roles).map(role => role.toUpperCase());
-  //     const matchedRoles: string[] = [];
-  //     for (let i = 0; i < roles.length; i++) {
-  //       if (typeof (RolesEnum[RolesEnum[roles[i] as keyof typeof RolesEnum]]) !== 'undefined') {
-  //         matchedRoles.push(roleNamesMapping[RolesEnum[roles[1] as keyof typeof RolesEnum]].name);
-  //         matchedRoles.push('user-role-admin');
-  //       }
-  //     }
-  //     if (matchedRoles.length === 0) {
-  //       return roleNamesMapping[RolesEnum.UNKNOWN].name;1
-  //     } else {
-  //       return matchedRoles.join(', ');
-  //     }
-  //   } else {
-  //     return roleNamesMapping[RolesEnum.NOT_LOGGED].name;
-  //   }
-  // }
-
-  static getFullName(): string {
-    return KeycloakService.keycloakAuthObject.tokenParsed.name;
-  }
-
-  static getSub(): string | null {
-    if (KeycloakService.keycloakAuthObject && KeycloakService.keycloakAuthObject['tokenParsed']) {
-      return KeycloakService.keycloakAuthObject['tokenParsed']['sub'];
-    } else {
-      return null;
-    }
-  }
-
   static isAuthenticated(): boolean {
     return KeycloakService.keycloakAuthObject.authenticated;
   }
 
-  static getTokenSt(): Promise<KeyCloakTokenResult> {
+  static getTokenSt(): Promise<tokenResult> {
     return new Promise((resolve, reject) => {
       if (KeycloakService.keycloakAuthObject && KeycloakService.keycloakAuthObject.token) {
         KeycloakService.keycloakAuthObject
@@ -138,20 +97,17 @@ export class KeycloakService {
         .then((l: any) => {
           console.log('l', l)
           if (environment.authDebug) {
-            console.error('Auth granted');
-            console.log(KeycloakService.keycloakAuthObject);
           }
           KeycloakService.keycloakAuthObject = environment.keyCloakConstructParams.logoutUrl;
           resolve(KeycloakService.keycloakAuthObject);
         })
         .catch(() => {
-          console.error('Auth rejected');
           reject();
         });
     });
   }
 
-  getToken(): Promise<KeyCloakTokenResult> {
+  getToken(): Promise<tokenResult> {
     return new Promise((resolve, reject) => {
       if (KeycloakService.keycloakAuthObject && KeycloakService.keycloakAuthObject.token) {
         KeycloakService.keycloakAuthObject

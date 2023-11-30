@@ -6,7 +6,7 @@ import { WalletBalanceModalComponent } from './wallet-balance-modal/wallet-balan
 import { MatDialog } from '@angular/material/dialog';
 import { UserFormModalComponent } from '../users/user-form-modal/user-form-modal.component';
 import { Router } from '@angular/router';
-import { KeycloakService } from '../shared/auth/keycloak.service';
+import { KeycloakService } from '../shared/keycloak/services/keycloak.service';
 
 @Component({
   selector: 'app-user-account',

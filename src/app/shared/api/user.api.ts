@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { User } from "../models/user.model";
-import { KeycloakService } from "../auth/keycloak.service";
+import { KeycloakService } from "../keycloak/services/keycloak.service";
 import { of, switchMap } from "rxjs";
 
 @Injectable({

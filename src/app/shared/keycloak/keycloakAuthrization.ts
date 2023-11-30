@@ -4,30 +4,23 @@ import {
 } from '@angular/common/http';
 import { Observable, from } from 'rxjs';
 import { concatMap } from 'rxjs/operators';
-import { KeycloakService } from './keycloak.service';
-import { KeyCloakTokenResult } from '../types/authTypes';
+import { KeycloakService } from './services/keycloak.service';
 import { environment } from 'src/app/environments/environment';
 
-
-/** Pass untouched request through to the next request handler. */
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
+export class KeycloakAuthorization implements HttpInterceptor {
 
-  DEBUG_MODE: boolean;
 
   constructor(private keycloakService: KeycloakService) {
-    this.DEBUG_MODE = environment.authDebug;
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    if (this.DEBUG_MODE) { console.log('Authentication HTTP Interceptor called'); }
     if (environment.authConfig.authRequired === true) {
-      const tokenPromise: Promise<KeyCloakTokenResult> = this.keycloakService.getToken();
-      const tokenObservable: Observable<KeyCloakTokenResult> = from(tokenPromise);
+      const tokenPromise: Promise<tokenResult> = this.keycloakService.getToken();
+      const tokenObservable: Observable<tokenResult> = from(tokenPromise);
       return tokenObservable.pipe(
         concatMap(tokenResult => {
           if (tokenResult.success === true) {
-            if (this.DEBUG_MODE) {console.log('API with token', tokenResult); }
             if (environment.authConfig.authHttp === true) {
               const clonedReq = req.clone({
                 headers: req.headers.append('Authorization', 'Bearer ' + tokenResult.token)
@@ -38,7 +31,6 @@ export class AuthInterceptor implements HttpInterceptor {
               return next.handle(req);
             }
           } else {
-            if (this.DEBUG_MODE) { console.warn('Unable to refresh Auth token'); }
             this.keycloakService.clearToken();
             return next.handle(req);
           }
@@ -56,5 +48,7 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 }
 
-
-
+export interface tokenResult {
+  success: boolean,
+  token: any
+}

@@ -1,8 +1,7 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { KeycloakService } from './shared/auth/keycloak.service';
+import { KeycloakService } from './shared/keycloak/services/keycloak.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { AuthInterceptor } from './shared/auth/authInterceptor';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,6 +13,7 @@ import { NgxMatNativeDateModule } from '@angular-material-components/datetime-pi
 import { FilteredApi } from './shared/api/filtered.api';
 import { CarApi } from './shared/api/car.api';
 import { UserApi } from './shared/api/user.api';
+import { KeycloakAuthorization } from './shared/keycloak/keycloakAuthrization';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import { UserApi } from './shared/api/user.api';
     KeycloakService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
+      useClass: KeycloakAuthorization,
       multi: true,
     },
     {

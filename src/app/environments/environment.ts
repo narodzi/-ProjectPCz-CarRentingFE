@@ -1,10 +1,5 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
 
-import { Environment } from "./environment.interface";
-
-export const environment: Environment = {
+export const environment = {
   production: false,
   baseHref: "",
   defaultLang: "en",
@@ -17,17 +12,17 @@ export const environment: Environment = {
 
   apiUrl: "/",
   keyCloakConstructParams: {
-    url: "http://localhost:8080/" /* Authorization server URL */,
+    url: "http://localhost:8080/",
     realm: "CarRenting",
     clientId: "car-renting",
     "ssl-required": "external",
     "public-client": true,
-    "auth-server-url": "http://localhost:8080/" /* Authorization server URL */,
+    "auth-server-url": "http://localhost:8080/",
     "confidential-port": 0,
     resource: "car-renting",
-    logoutUrl: "http://localhost:4200" /* Redirection URI after logout() */,
+    logoutUrl: "http://localhost:4200" ,
     redirect_uri:
-      "http://localhost:4200" /* Redirection URI after failed KC operation */,
+      "http://localhost:4200",
   },
   keyCloakInitParams: {
     onLoad: "login-required",

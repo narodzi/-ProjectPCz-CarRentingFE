@@ -6,7 +6,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { KeycloakService } from '../auth/keycloak.service';
+import { KeycloakService } from '../keycloak/services/keycloak.service';
 
 
 @Injectable({

@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Rental, RentalRequest } from "../models/rental.model";
-import { KeycloakService } from "../auth/keycloak.service";
+import { KeycloakService } from "../keycloak/services/keycloak.service";
 
 @Injectable({
     providedIn: 'root'

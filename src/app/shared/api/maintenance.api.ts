@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { KeycloakService } from "../auth/keycloak.service";
+import { KeycloakService } from "../keycloak/services/keycloak.service";
 import { Maintenance } from "../models/maintenance.model";
 
 @Injectable({
