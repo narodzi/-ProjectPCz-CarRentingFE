@@ -3,5 +3,6 @@ export type FilteredParameters = Partial<{
     number_of_seats: number[],
     gearboxes: string[],
     fuel_types: string[],
-    number_of_doors: number[]
+    number_of_doors: number[],
+    type: string[]
 }>

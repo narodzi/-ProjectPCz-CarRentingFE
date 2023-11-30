@@ -36,10 +36,10 @@
         <mat-label>Typ</mat-label>
         <mat-select [formControl]="searchForm.controls.carType">
           <mat-option
-          *ngFor="let carModel of modelOptions"
-          [value]="carModel"
+          *ngFor="let type of parameters.type"
+          [value]="type"
           >
-              {{ carModel }}
+              {{ type }}
             </mat-option>
           </mat-select>
         </mat-form-field>
