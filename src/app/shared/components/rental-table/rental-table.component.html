@@ -1,7 +1,7 @@
 <ng-container *ngIf="rentalData.length; else empty">
   <table [ngClass]="mode === RentalTableMode.USER ? 'user-table' : 'admin-table'" mat-table [dataSource]="dataSource">
       <ng-container matColumnDef="car_id">
-          <th mat-header-cell *matHeaderCellDef> Zdjęcie samochodu </th>
+          <th mat-header-cell *matHeaderCellDef> Id samochodu </th>
           <td mat-cell *matCellDef="let element"> {{element.car_id}} </td>
         </ng-container>
   
