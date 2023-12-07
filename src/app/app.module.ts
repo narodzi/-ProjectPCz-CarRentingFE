@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { KeycloakService } from './shared/keycloak/services/keycloak.service';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -14,6 +14,7 @@ import { FilteredApi } from './shared/api/filtered.api';
 import { CarApi } from './shared/api/car.api';
 import { UserApi } from './shared/api/user.api';
 import { KeycloakAuthorization } from './shared/keycloak/keycloakAuthrization';
+import { NgxEchartsModule } from 'ngx-echarts';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,10 @@ import { KeycloakAuthorization } from './shared/keycloak/keycloakAuthrization';
     CarModule,
     MatNativeDateModule,
     NgxMatNativeDateModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
   providers: [
     KeycloakService,

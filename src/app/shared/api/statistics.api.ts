@@ -1,6 +1,5 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { of, switchMap } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -8,7 +7,11 @@ import { of, switchMap } from "rxjs";
 export class StatisticsApi {
     constructor(private readonly http: HttpClient) {}
 
-    getIncome() {
-        return this.http.get<Partial<{income: string | null}>>('http://localhost:4300/statistics/')
+    getOverallProfit() {
+        return this.http.get<number>('http://localhost:4300/profit/')
+    }
+    
+    getMonthlyProfit() {
+        return this.http.get<number[]>('http://localhost:4300/profit/monthly')
     }
 }

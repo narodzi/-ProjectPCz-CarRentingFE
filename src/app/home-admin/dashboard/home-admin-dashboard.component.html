@@ -1,22 +1,16 @@
 <div class="container">
     <div class="column">
-        <mat-card class="shadow">
+      <p class="header-text"> CarRental sp z.o.o - panel</p>
+        <mat-card>
+            <ng-container *ngIf="overallProfit$ | async as statistics">
             <mat-card-header>
-              <mat-card-title> CarRental sp z.o.o - panel</mat-card-title>
+              <mat-card-title>{{ "Całkowity przychód firmy " + statistics + ' zł' }}</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-            </mat-card-content>
-          </mat-card>
-        <!-- <mat-card>
-            <ng-container *ngIf="statistics$ | async as statistics">
-            <mat-card-header>
-              <mat-card-title> Przychody firmy</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              {{ statistics.income }}
+              <div echarts [options]="options" class="demo-chart"></div>
             </mat-card-content>
           </ng-container>
-        </mat-card> -->
+        </mat-card>
     </div>
     <div class="column shadow">
       <ng-container *ngIf="rentals$ | async as rentals">
